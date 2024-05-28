@@ -18,7 +18,7 @@ import {
   mConStr2,
 } from '@meshsdk/mesh-csl';
 import blueprint from './aiken-workspace/plutus.json';
-import { Asset, UTxO, mergeAssets } from '@meshsdk/core';
+import { Asset, Data, UTxO, mergeAssets } from '@meshsdk/core';
 
 export type InitiationDatum = ConStr0<[PubKeyAddress, Value]>;
 export const initiateEscrowDatum = (
@@ -71,7 +71,8 @@ export class MeshEscrowContract extends MeshTxInitiator {
     await this.mesh
       .txOut(scriptAddr, escrowAmount)
       .txOutInlineDatumValue(
-        initiateEscrowDatum(walletAddress, escrowAmount),
+        // TODO: remove dodgy cast
+        initiateEscrowDatum(walletAddress, escrowAmount) as unknown as Data,
         'JSON'
       )
       .changeAddress(walletAddress)
@@ -169,7 +170,11 @@ export class MeshEscrowContract extends MeshTxInitiator {
       )
       .spendingReferenceTxInInlineDatumPresent()
       .txInRedeemerValue(
-        recipientDepositRedeemer(walletAddress, depositAmount),
+        // TODO: remove dodgy cast
+        recipientDepositRedeemer(
+          walletAddress,
+          depositAmount
+        ) as unknown as Data,
         {
           mem: 7_000_000,
           steps: 3_000_000_000,
@@ -178,7 +183,8 @@ export class MeshEscrowContract extends MeshTxInitiator {
       )
       .txInScript(this.scriptCbor)
       .txOut(scriptAddr, escrowAmount)
-      .txOutInlineDatumValue(outputDatum, 'JSON')
+      // TODO: remove dodgy cast
+      .txOutInlineDatumValue(outputDatum as unknown as Data, 'JSON')
       .changeAddress(walletAddress)
       .txInCollateral(
         collateral.input.txHash,

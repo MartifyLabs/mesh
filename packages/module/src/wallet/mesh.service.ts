@@ -3,24 +3,24 @@ import {
   IInitiator,
   ISigner,
   ISubmitter,
-} from '@mesh/common/contracts';
-import { AppWallet } from './app.service';
-import type { Address, TransactionUnspentOutput } from '@mesh/core';
+} from '../common/contracts/index.js';
+import { AppWallet } from './app.service.js';
+import type { Address, TransactionUnspentOutput } from '../core/index.js';
 import type {
   Asset,
   AssetExtended,
   DataSignature,
   UTxO,
-} from '@mesh/common/types';
+} from '../common/types/index.js';
 import {
   fromTxUnspentOutput,
   toUTF8,
   resolveFingerprint,
   toTxUnspentOutput,
   resolvePrivateKey,
-} from '@mesh/common/utils';
-import { POLICY_ID_LENGTH } from '@mesh/common/constants';
-import { EmbeddedWallet, Transaction } from '..';
+} from '../common/utils/index.js';
+import { POLICY_ID_LENGTH } from '../common/constants.js';
+import { EmbeddedWallet, Transaction } from '../index.js';
 
 export type CreateMeshWalletOptions = {
   networkId: number;

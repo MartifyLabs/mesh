@@ -1,3 +1,3 @@
-import { SUPPORTED_TOKENS } from '@mesh/common/constants';
+import { SUPPORTED_TOKENS } from '../../common/constants.js';
 
 export type Token = keyof typeof SUPPORTED_TOKENS;

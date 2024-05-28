@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
-import { SUPPORTED_HANDLES } from '@mesh/common/constants';
-import { IFetcher, IListener, ISubmitter } from '@mesh/common/contracts';
+import { SUPPORTED_HANDLES } from '../common/constants.js';
+import { IFetcher, IListener, ISubmitter } from '../common/contracts/index.js';
 import {
   deserializeNativeScript,
   fromNativeScript,
@@ -11,7 +11,7 @@ import {
   toBytes,
   toScriptRef,
   toUTF8,
-} from '@mesh/common/utils';
+} from '../common/utils/index.js';
 import type {
   AccountInfo,
   Asset,
@@ -21,7 +21,7 @@ import type {
   Protocol,
   TransactionInfo,
   UTxO,
-} from '@mesh/common/types';
+} from '../common/types/index.js';
 
 export class KoiosProvider implements IFetcher, IListener, ISubmitter {
   private readonly _axiosInstance: AxiosInstance;

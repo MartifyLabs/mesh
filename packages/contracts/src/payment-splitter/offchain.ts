@@ -3,6 +3,8 @@ import {
   resolvePlutusScriptAddress,
   resolvePaymentKeyHash,
   Transaction,
+  PlutusScript,
+  Action,
 } from '@meshsdk/core';
 import {
   serializeBech32Address,
@@ -49,7 +51,7 @@ export class MeshPaymentSplitterContract extends MeshTxInitiator {
 
     const { walletAddress } = await this.getWalletInfoForTx();
 
-    const script = {
+    const script: PlutusScript = {
       code: this.scriptCbor(),
       version: 'V2',
     };
@@ -83,7 +85,7 @@ export class MeshPaymentSplitterContract extends MeshTxInitiator {
 
     const { walletAddress, collateral } = await this.getWalletInfoForTx();
 
-    const script = {
+    const script: PlutusScript = {
       code: this.scriptCbor(),
       version: 'V2',
     };
@@ -96,7 +98,9 @@ export class MeshPaymentSplitterContract extends MeshTxInitiator {
     };
 
     const redeemerData = 'Hello, World!';
-    const redeemer = { data: { alternative: 0, fields: [redeemerData] } };
+    const redeemer: Action = {
+      data: { alternative: 0, fields: [redeemerData] },
+    } as Action; // NOTE: cast needed as we're missing `index`, `budget` and `tag`
 
     let tx = new Transaction({ initiator: this.wallet });
     let split = 0;

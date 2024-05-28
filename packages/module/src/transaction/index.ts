@@ -1,2 +1,2 @@
-export * from './transaction.service';
-export * from './meshTxBuilder';
+export * from './transaction.service.js';
+export * from './meshTxBuilder/index.js';

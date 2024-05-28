@@ -1,4 +1,8 @@
-import type { MetadataStandard, Files, RoyaltiesStandard } from '@mesh/core';
+import type {
+  MetadataStandard,
+  Files,
+  RoyaltiesStandard,
+} from '../../core/index.js';
 
 export type AssetMetadata =
   | FungibleAssetMetadata
@@ -19,16 +23,19 @@ export type NonFungibleAssetMetadata =
 
 type AudioAssetMetadata = MetadataStandard & Files;
 
-export type ImageAssetMetadata = MetadataStandard & Files & {
-  artists?: [{
-    name: string;
-    twitter?: `https://twitter.com/${string}`;
-  }];
-  attributes?: {
-    [key: string]: string;
+export type ImageAssetMetadata = MetadataStandard &
+  Files & {
+    artists?: [
+      {
+        name: string;
+        twitter?: `https://twitter.com/${string}`;
+      }
+    ];
+    attributes?: {
+      [key: string]: string;
+    };
+    traits?: string[];
   };
-  traits?: string[];
-};
 
 type SmartAssetMetadata = MetadataStandard & Files;
 

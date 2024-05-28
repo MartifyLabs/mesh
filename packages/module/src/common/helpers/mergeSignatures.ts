@@ -1,10 +1,12 @@
-import { csl } from '@mesh/core';
+import { csl } from '../../core/index.js';
 import type {
-  TransactionWitnessSet, Vkeywitnesses,
-} from '@mesh/core';
+  TransactionWitnessSet,
+  Vkeywitnesses,
+} from '../..//core/index.js';
 
 export const mergeSignatures = (
-  txWitnessSet: TransactionWitnessSet, newSignatures: Vkeywitnesses,
+  txWitnessSet: TransactionWitnessSet,
+  newSignatures: Vkeywitnesses
 ) => {
   const txSignatures = txWitnessSet.vkeys();
 

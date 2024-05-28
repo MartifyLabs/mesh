@@ -1,12 +1,14 @@
-import { Data } from './Data';
-import { NativeScript } from './NativeScript';
-import { PlutusScript } from './PlutusScript';
+import { Data } from './Data.js';
+import { NativeScript } from './NativeScript.js';
+import { PlutusScript } from './PlutusScript.js';
 
-export type Recipient = string | {
-  address: string;
-  datum?: {
-    value: Data;
-    inline?: boolean;
-  };
-  script?: PlutusScript | NativeScript;
-};
+export type Recipient =
+  | string
+  | {
+      address: string;
+      datum?: {
+        value: Data;
+        inline?: boolean;
+      };
+      script?: PlutusScript | NativeScript;
+    };

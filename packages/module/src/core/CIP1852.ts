@@ -1,5 +1,5 @@
-import { HARDENED_KEY_START } from '@mesh/common/constants';
-import { deserializeBip32PrivateKey } from '@mesh/common/utils';
+import { HARDENED_KEY_START } from '../common/constants.js';
+import { deserializeBip32PrivateKey } from '../common/utils/index.js';
 
 export const deriveAccountKeys = (rootKey: string, accountIndex: number) => {
   const bip32PrivateKey = deserializeBip32PrivateKey(rootKey);
@@ -11,11 +11,13 @@ export const deriveAccountKeys = (rootKey: string, accountIndex: number) => {
 
   const paymentKey = accountKeys
     .derive(0) // external chain
-    .derive(0).to_raw_key();
+    .derive(0)
+    .to_raw_key();
 
   const stakeKey = accountKeys
     .derive(2) // staking key
-    .derive(0).to_raw_key();
+    .derive(0)
+    .to_raw_key();
 
   accountKeys.free();
   bip32PrivateKey.free();

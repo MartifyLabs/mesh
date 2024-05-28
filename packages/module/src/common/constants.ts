@@ -1,6 +1,6 @@
-import { csl } from '@mesh/core';
-import type { Costmdls } from '@mesh/core';
-import type { Budget, Era, Network, Protocol } from './types';
+import { csl } from '../core/index.js';
+import type { Costmdls } from '../core/index.js';
+import type { Budget, Era, Network, Protocol } from './types/index.js';
 
 export const DEFAULT_REDEEMER_BUDGET: Budget = {
   mem: 7_000_000,
@@ -46,12 +46,10 @@ export const REDEEMER_TAGS = {
   SPEND: csl.RedeemerTag.new_spend(),
 };
 
-export const SUPPORTED_CLOCKS: Record<Network, [
-  epoch: string,
-  slot: string,
-  systemStart: string,
-  epochLength: string,
-]> = {
+export const SUPPORTED_CLOCKS: Record<
+  Network,
+  [epoch: string, slot: string, systemStart: string, epochLength: string]
+> = {
   testnet: ['74', '1598400', '1595967616', '432000'],
   preview: ['183', '15811222', '1682467200', '86400'],
   preprod: ['65', '26438400', '1682121600', '432000'],
@@ -230,7 +228,7 @@ export const SUPPORTED_COST_MODELS: Record<Era, Costmdls> = {
       'unMapData-memory-arguments': 32,
       'verifyEd25519Signature-cpu-arguments-intercept': 57996947,
       'verifyEd25519Signature-cpu-arguments-slope': 18975,
-      'verifyEd25519Signature-memory-arguments': 10
+      'verifyEd25519Signature-memory-arguments': 10,
     }).forEach((cost, operation) =>
       v1CostModel.set(operation, csl.Int.new_i32(cost))
     );
@@ -411,7 +409,7 @@ export const SUPPORTED_COST_MODELS: Record<Era, Costmdls> = {
       'verifyEd25519Signature-memory-arguments': 10,
       'verifySchnorrSecp256k1Signature-cpu-arguments-intercept': 38887044,
       'verifySchnorrSecp256k1Signature-cpu-arguments-slope': 32947,
-      'verifySchnorrSecp256k1Signature-memory-arguments': 10
+      'verifySchnorrSecp256k1Signature-memory-arguments': 10,
     }).forEach((cost, operation) =>
       v2CostModel.set(operation, csl.Int.new_i32(cost))
     );
@@ -424,7 +422,8 @@ export const SUPPORTED_COST_MODELS: Record<Era, Costmdls> = {
 };
 
 export const SUPPORTED_LANGUAGE_VIEWS: Record<
-  Era, Partial<Record<keyof typeof LANGUAGE_VERSIONS, string>>
+  Era,
+  Partial<Record<keyof typeof LANGUAGE_VERSIONS, string>>
 > = {
   ALONZO: {
     V1: 'a141005901d59f1a000302590001011a00060bc719026d00011a000249f01903e800011a000249f018201a0025cea81971f70419744d186419744d186419744d186419744d186419744d186419744d18641864186419744d18641a000249f018201a000249f018201a000249f018201a000249f01903e800011a000249f018201a000249f01903e800081a000242201a00067e2318760001011a000249f01903e800081a000249f01a0001b79818f7011a000249f0192710011a0002155e19052e011903e81a000249f01903e8011a000249f018201a000249f018201a000249f0182001011a000249f0011a000249f0041a000194af18f8011a000194af18f8011a0002377c190556011a0002bdea1901f1011a000249f018201a000249f018201a000249f018201a000249f018201a000249f018201a000249f018201a000242201a00067e23187600010119f04c192bd200011a000249f018201a000242201a00067e2318760001011a000242201a00067e2318760001011a0025cea81971f704001a000141bb041a000249f019138800011a000249f018201a000302590001011a000249f018201a000249f018201a000249f018201a000249f018201a000249f018201a000249f018201a000249f018201a00330da70101ff',
@@ -436,8 +435,10 @@ export const SUPPORTED_LANGUAGE_VIEWS: Record<
 };
 
 export const SUPPORTED_HANDLES: Record<number, string> = {
-  [csl.NetworkInfo.testnet().network_id()]: '8d18d786e92776c824607fd8e193ec535c79dc61ea2405ddf3b09fe3',
-  [csl.NetworkInfo.mainnet().network_id()]: 'f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a',
+  [csl.NetworkInfo.testnet().network_id()]:
+    '8d18d786e92776c824607fd8e193ec535c79dc61ea2405ddf3b09fe3',
+  [csl.NetworkInfo.mainnet().network_id()]:
+    'f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a',
 };
 
 export const SUPPORTED_OGMIOS_LINKS: Record<Network, string> = {
@@ -467,11 +468,15 @@ export const SUPPORTED_TOKENS = {
   HOSKY: 'a0028f350aaabe0545fdcb56b039bfb08e4bb4d8c4d7c3c7d481c235484f534b59',
   YUMMI: '078eafce5cd7edafdf63900edef2c1ea759e77f30ca81d6bbdeec92479756d6d69',
   C3: '8e51398904a5d3fc129fbf4f1589701de23c7824d5c90fdb9490e15a434841524c4933',
-  GIMBAL: '2b0a04a7b60132b1805b296c7fcb3b217ff14413991bf76f72663c3067696d62616c',
-  SUNDAE: '9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d7753554e444145',
-  GREENS: '4623ab311b7d982d8d26fcbe1a9439ca56661aafcdcd8d8a0ef31fd6475245454e53',
+  GIMBAL:
+    '2b0a04a7b60132b1805b296c7fcb3b217ff14413991bf76f72663c3067696d62616c',
+  SUNDAE:
+    '9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d7753554e444145',
+  GREENS:
+    '4623ab311b7d982d8d26fcbe1a9439ca56661aafcdcd8d8a0ef31fd6475245454e53',
   GENS: 'dda5fdb1002f7389b33e036b6afee82a8189becb6cba852e8b79b4fb0014df1047454e53',
-  SOCIETY: '25f0fc240e91bd95dcdaebd2ba7713fc5168ac77234a3d79449fc20c534f4349455459',
+  SOCIETY:
+    '25f0fc240e91bd95dcdaebd2ba7713fc5168ac77234a3d79449fc20c534f4349455459',
   DJED: '8db269c3ec630e06ae29f74bc39edd1f87c819f1056206e879a1cd61446a65644d6963726f555344',
   SHEN: '8db269c3ec630e06ae29f74bc39edd1f87c819f1056206e879a1cd615368656e4d6963726f555344',
   WMT: '1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e776f726c646d6f62696c65746f6b656e',
@@ -479,5 +484,14 @@ export const SUPPORTED_TOKENS = {
 };
 
 export const SUPPORTED_WALLETS = [
-  'begin', 'eternl', 'flint', 'lace', 'nami', 'nufi', 'gerowallet', 'typhoncip30', 'vespr', 'yoroi'
+  'begin',
+  'eternl',
+  'flint',
+  'lace',
+  'nami',
+  'nufi',
+  'gerowallet',
+  'typhoncip30',
+  'vespr',
+  'yoroi',
 ];

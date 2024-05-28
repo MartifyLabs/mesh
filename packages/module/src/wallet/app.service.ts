@@ -1,20 +1,20 @@
-import { csl } from '@mesh/core';
-import { DEFAULT_PROTOCOL_PARAMETERS } from '@mesh/common/constants';
+import { csl } from '../core/index.js';
+import { DEFAULT_PROTOCOL_PARAMETERS } from '../common/constants.js';
 import {
   IFetcher,
   IInitiator,
   ISigner,
   ISubmitter,
-} from '@mesh/common/contracts';
-import { mergeSignatures } from '@mesh/common/helpers';
+} from '../common/contracts/index.js';
+import { mergeSignatures } from '../common/helpers/index.js';
 import {
   deserializeTx,
   toAddress,
   toTxUnspentOutput,
-} from '@mesh/common/utils';
-import { EmbeddedWallet } from './embedded.service';
-import type { Address, TransactionUnspentOutput } from '@mesh/core';
-import type { DataSignature } from '@mesh/common/types';
+} from '../common/utils/index.js';
+import { EmbeddedWallet } from './embedded.service.js';
+import type { Address, TransactionUnspentOutput } from '../core/index.js';
+import type { DataSignature } from '../common/types/index.js';
 
 const DEFAULT_PASSWORD = 'MARI0TIME';
 

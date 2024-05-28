@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { IUploader } from '@mesh/common/contracts';
-import { parseHttpError } from '@mesh/common/utils';
+import { IUploader } from '../common/contracts/index.js';
+import { parseHttpError } from '../common/utils/index.js';
 
 export class InfuraProvider implements IUploader {
   private _axiosInstance: AxiosInstance;
@@ -24,11 +24,12 @@ export class InfuraProvider implements IUploader {
     try {
       const headers = { 'Content-Type': 'multipart/form-data' };
       const { data, status } = await this._axiosInstance.post(
-        `add?recursive=${recursive}`, content, { headers }
+        `add?recursive=${recursive}`,
+        content,
+        { headers }
       );
 
-      if (status === 200)
-        return data;
+      if (status === 200) return data;
 
       throw parseHttpError(data);
     } catch (error) {

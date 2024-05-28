@@ -1,4 +1,4 @@
-import { Quantity, Unit } from './Asset';
+import { Quantity, Unit } from './Asset.js';
 
 export type AssetExtended = {
   unit: Unit;

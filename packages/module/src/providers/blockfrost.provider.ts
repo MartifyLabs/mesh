@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { SUPPORTED_HANDLES } from '@mesh/common/constants';
-import { IFetcher, IListener, ISubmitter } from '@mesh/common/contracts';
+import { SUPPORTED_HANDLES } from '../common/constants.js';
+import { IFetcher, IListener, ISubmitter } from '../common/contracts/index.js';
 import {
   fromUTF8,
   parseAssetUnit,
@@ -8,7 +8,7 @@ import {
   resolveRewardAddress,
   toBytes,
   toScriptRef,
-} from '@mesh/common/utils';
+} from '../common/utils/index.js';
 import type {
   AccountInfo,
   Asset,
@@ -19,7 +19,7 @@ import type {
   Protocol,
   TransactionInfo,
   UTxO,
-} from '@mesh/common/types';
+} from '../common/types/index.js';
 
 /**
  * [Blockfrost](https://blockfrost.io/) provides restful APIs which allows your app to access information stored on the blockchain.

@@ -1,5 +1,5 @@
-import { HARDENED_KEY_START } from '@mesh/common/constants';
-import { deserializeBip32PrivateKey } from '@mesh/common/utils';
+import { HARDENED_KEY_START } from '../common/constants.js';
+import { deserializeBip32PrivateKey } from '../common/utils/index.js';
 
 export const deriveStakePoolColdKey = (rootKey: string, coldIndex: number) => {
   const bip32PrivateKey = deserializeBip32PrivateKey(rootKey);

@@ -1,27 +1,26 @@
-import { csl } from '@mesh/core';
+import { csl } from '../core/index.js';
 import {
-  buildScriptPubkey, deserializeEd25519KeyHash,
-  resolvePaymentKeyHash, toNativeScript,
-} from '@mesh/common/utils';
-import type { NativeScript } from '@mesh/common/types';
+  buildScriptPubkey,
+  deserializeEd25519KeyHash,
+  resolvePaymentKeyHash,
+  toNativeScript,
+} from '../common/utils/index.js';
+import type { NativeScript } from '../common/types/index.js';
 
 export class ForgeScript {
   static withOneSignature(address: string): string {
-    const keyHash = deserializeEd25519KeyHash(
-      resolvePaymentKeyHash(address),
-    );
+    const keyHash = deserializeEd25519KeyHash(resolvePaymentKeyHash(address));
     return buildScriptPubkey(keyHash).to_hex();
   }
 
   static withAtLeastNSignatures(
-    addresses: string[], minimumRequired: number,
+    addresses: string[],
+    minimumRequired: number
   ): string {
     const nativeScripts = csl.NativeScripts.new();
 
     addresses.forEach((address) => {
-      const keyHash = deserializeEd25519KeyHash(
-        resolvePaymentKeyHash(address),
-      );
+      const keyHash = deserializeEd25519KeyHash(resolvePaymentKeyHash(address));
       nativeScripts.add(buildScriptPubkey(keyHash));
     });
 
@@ -33,9 +32,7 @@ export class ForgeScript {
     const nativeScripts = csl.NativeScripts.new();
 
     addresses.forEach((address) => {
-      const keyHash = deserializeEd25519KeyHash(
-        resolvePaymentKeyHash(address),
-      );
+      const keyHash = deserializeEd25519KeyHash(resolvePaymentKeyHash(address));
       nativeScripts.add(buildScriptPubkey(keyHash));
     });
 
@@ -47,9 +44,7 @@ export class ForgeScript {
     const nativeScripts = csl.NativeScripts.new();
 
     addresses.forEach((address) => {
-      const keyHash = deserializeEd25519KeyHash(
-        resolvePaymentKeyHash(address),
-      );
+      const keyHash = deserializeEd25519KeyHash(resolvePaymentKeyHash(address));
       nativeScripts.add(buildScriptPubkey(keyHash));
     });
 

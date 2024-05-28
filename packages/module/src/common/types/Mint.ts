@@ -1,6 +1,6 @@
-import { Quantity } from './Asset';
-import { AssetMetadata } from './AssetMetadata';
-import { Recipient } from './Recipient';
+import { Quantity } from './Asset.js';
+import { AssetMetadata } from './AssetMetadata.js';
+import { Recipient } from './Recipient.js';
 
 export type Mint = {
   assetName: string;

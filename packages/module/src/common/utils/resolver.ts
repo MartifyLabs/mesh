@@ -1,21 +1,30 @@
 import { mnemonicToEntropy } from 'bip39';
-import { AssetFingerprint, csl } from '@mesh/core';
+import { AssetFingerprint, csl } from '../../core/index.js';
 import {
-  SUPPORTED_CLOCKS, DEFAULT_PROTOCOL_PARAMETERS, SUPPORTED_LANGUAGE_VIEWS,
-} from '@mesh/common/constants';
+  SUPPORTED_CLOCKS,
+  DEFAULT_PROTOCOL_PARAMETERS,
+  SUPPORTED_LANGUAGE_VIEWS,
+} from '../../common/constants.js';
+import { buildBip32PrivateKey, buildRewardAddress } from './builder.js';
 import {
-  buildBip32PrivateKey, buildRewardAddress,
-} from './builder';
-import {
-  toAddress, toBaseAddress, toBytes, toEnterpriseAddress,
-  toNativeScript, toPlutusData, toRewardAddress, toScriptRef,
-} from './converter';
-import {
-  deserializePlutusScript, deserializeTx,
-} from './deserializer';
+  toAddress,
+  toBaseAddress,
+  toBytes,
+  toEnterpriseAddress,
+  toNativeScript,
+  toPlutusData,
+  toRewardAddress,
+  toScriptRef,
+} from './converter.js';
+import { deserializePlutusScript, deserializeTx } from './deserializer.js';
 import type {
-  Data, Era, LanguageVersion, NativeScript, Network, PlutusScript,
-} from '@mesh/common/types';
+  Data,
+  Era,
+  LanguageVersion,
+  NativeScript,
+  Network,
+  PlutusScript,
+} from '../../common/types/index.js';
 
 export const resolveDataHash = (data: Data) => {
   const plutusData = toPlutusData(data);
@@ -25,17 +34,17 @@ export const resolveDataHash = (data: Data) => {
 
 export const resolveEpochNo = (network: Network, milliseconds = Date.now()) => {
   if (SUPPORTED_CLOCKS[network]) {
-    const [
-      epoch, _, systemStart, epochLength,
-    ] = SUPPORTED_CLOCKS[network];
+    const [epoch, _, systemStart, epochLength] = SUPPORTED_CLOCKS[network];
 
-    return parseInt(csl.BigNum
-      .from_str(milliseconds.toString())
-      .div_floor(csl.BigNum.from_str('1000'))
-      .checked_sub(csl.BigNum.from_str(systemStart))
-      .div_floor(csl.BigNum.from_str(epochLength))
-      .checked_add(csl.BigNum.from_str(epoch))
-      .to_str(), 10);
+    return parseInt(
+      csl.BigNum.from_str(milliseconds.toString())
+        .div_floor(csl.BigNum.from_str('1000'))
+        .checked_sub(csl.BigNum.from_str(systemStart))
+        .div_floor(csl.BigNum.from_str(epochLength))
+        .checked_add(csl.BigNum.from_str(epoch))
+        .to_str(),
+      10
+    );
   }
 
   throw new Error(`Couldn't resolve EpochNo for network: ${network}`);
@@ -74,20 +83,27 @@ export const resolvePaymentKeyHash = (bech32: string) => {
       toEnterpriseAddress(bech32)?.payment_cred().to_keyhash(),
     ].find((kh) => kh !== undefined);
 
-    if (paymentKeyHash !== undefined)
-      return paymentKeyHash.to_hex();
+    if (paymentKeyHash !== undefined) return paymentKeyHash.to_hex();
 
-    throw new Error(`Couldn't resolve payment key hash from address: ${bech32}`);
+    throw new Error(
+      `Couldn't resolve payment key hash from address: ${bech32}`
+    );
   } catch (error) {
-    throw new Error(`An error occurred during resolvePaymentKeyHash: ${error}.`);
+    throw new Error(
+      `An error occurred during resolvePaymentKeyHash: ${error}.`
+    );
   }
 };
 
-export const resolvePlutusScriptAddress = (script: PlutusScript, networkId = 0) => {
+export const resolvePlutusScriptAddress = (
+  script: PlutusScript,
+  networkId = 0
+) => {
   const plutusScript = deserializePlutusScript(script.code, script.version);
 
-  const enterpriseAddress = csl.EnterpriseAddress.new(networkId,
-    csl.StakeCredential.from_scripthash(plutusScript.hash()),
+  const enterpriseAddress = csl.EnterpriseAddress.new(
+    networkId,
+    csl.StakeCredential.from_scripthash(plutusScript.hash())
   );
 
   return enterpriseAddress.to_address().to_bech32();
@@ -96,11 +112,9 @@ export const resolvePlutusScriptAddress = (script: PlutusScript, networkId = 0) 
 export const resolvePlutusScriptHash = (bech32: string) => {
   try {
     const enterpriseAddress = toEnterpriseAddress(bech32);
-    const scriptHash = enterpriseAddress?.payment_cred()
-      .to_scripthash();
+    const scriptHash = enterpriseAddress?.payment_cred().to_scripthash();
 
-    if (scriptHash !== undefined)
-      return scriptHash.to_hex();
+    if (scriptHash !== undefined) return scriptHash.to_hex();
 
     throw new Error(`Couldn't resolve script hash from address: ${bech32}`);
   } catch (error) {
@@ -130,8 +144,7 @@ export const resolveSlotNo = (network: Network, milliseconds = Date.now()) => {
   if (SUPPORTED_CLOCKS[network]) {
     const [_, slot, systemStart] = SUPPORTED_CLOCKS[network];
 
-    return csl.BigNum
-      .from_str(milliseconds.toString())
+    return csl.BigNum.from_str(milliseconds.toString())
       .div_floor(csl.BigNum.from_str('1000'))
       .checked_sub(csl.BigNum.from_str(systemStart))
       .checked_add(csl.BigNum.from_str(slot))
@@ -149,7 +162,8 @@ export const resolveRewardAddress = (bech32: string) => {
 
     if (stakeKeyHash !== undefined)
       return buildRewardAddress(address.network_id(), stakeKeyHash)
-        .to_address().to_bech32();
+        .to_address()
+        .to_bech32();
 
     throw new Error(`Couldn't resolve reward address from address: ${bech32}`);
   } catch (error) {
@@ -164,8 +178,7 @@ export const resolveStakeKeyHash = (bech32: string) => {
       toRewardAddress(bech32)?.payment_cred().to_keyhash(),
     ].find((kh) => kh !== undefined);
 
-    if (stakeKeyHash !== undefined)
-      return stakeKeyHash.to_hex();
+    if (stakeKeyHash !== undefined) return stakeKeyHash.to_hex();
 
     throw new Error(`Couldn't resolve stake key hash from address: ${bech32}`);
   } catch (error) {
@@ -176,11 +189,9 @@ export const resolveStakeKeyHash = (bech32: string) => {
 export const resolveTxFees = (
   txSize: number,
   minFeeA = DEFAULT_PROTOCOL_PARAMETERS.minFeeA,
-  minFeeB = DEFAULT_PROTOCOL_PARAMETERS.minFeeB,
+  minFeeB = DEFAULT_PROTOCOL_PARAMETERS.minFeeB
 ) => {
-  const fees = BigInt(minFeeA)
-    * BigInt(txSize)
-    + BigInt(minFeeB);
+  const fees = BigInt(minFeeA) * BigInt(txSize) + BigInt(minFeeB);
 
   return fees.toString();
 };

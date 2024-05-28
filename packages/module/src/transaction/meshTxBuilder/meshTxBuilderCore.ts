@@ -2,7 +2,7 @@ import {
   DEFAULT_PROTOCOL_PARAMETERS,
   DEFAULT_REDEEMER_BUDGET,
   LANGUAGE_VERSIONS,
-} from '@mesh/common/constants';
+} from '../../common/constants.js';
 import {
   Action,
   Asset,
@@ -13,7 +13,7 @@ import {
   UTxO,
   Unit,
   PoolParams,
-} from '@mesh/common/types';
+} from '../../common/types/index.js';
 import {
   buildTxBuilder,
   toValue,
@@ -21,8 +21,8 @@ import {
   toAddress,
   buildDataCost,
   toRelay,
-} from '@mesh/common/utils';
-import { csl } from '@mesh/core';
+} from '../../common/utils/index.js';
+import { csl } from '../../core/index.js';
 import {
   MintItem,
   TxIn,
@@ -38,8 +38,8 @@ import {
   BuilderData,
   Certificate,
   TxInParameter,
-} from './type';
-import { selectUtxos } from '@mesh/core/CPS-009';
+} from './type.js';
+import { selectUtxos } from '../../core/CPS-009.js';
 import JSONbig from 'json-bigint';
 
 export class MeshTxBuilderCore {

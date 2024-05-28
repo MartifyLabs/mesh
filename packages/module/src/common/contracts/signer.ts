@@ -1,4 +1,4 @@
-import { DataSignature } from '@mesh/common/types';
+import { DataSignature } from '../../common/types/index.js';
 
 export interface ISigner {
   signData(address: string, payload: string): SometimesPromise<DataSignature>;

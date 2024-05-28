@@ -1,5 +1,5 @@
-import { REDEEMER_TAGS } from '@mesh/common/constants';
-import { Data } from './Data';
+import { REDEEMER_TAGS } from '../../common/constants.js';
+import { Data } from './Data.js';
 
 export type Action = {
   data: Data;

@@ -1,11 +1,11 @@
-import { csl } from '@mesh/core';
+import { csl } from '../core/index.js';
 import {
   DEFAULT_PROTOCOL_PARAMETERS,
   POLICY_ID_LENGTH,
   SUPPORTED_WALLETS,
-} from '@mesh/common/constants';
-import { IInitiator, ISigner, ISubmitter } from '@mesh/common/contracts';
-import { mergeSignatures } from '@mesh/common/helpers';
+} from '../common/constants.js';
+import { IInitiator, ISigner, ISubmitter } from '../common/contracts/index.js';
+import { mergeSignatures } from '../common/helpers/index.js';
 import {
   deserializeAddress,
   deserializeTx,
@@ -20,15 +20,15 @@ import {
   toAddress,
   toUTF8,
   toValue,
-} from '@mesh/common/utils';
-import type { Address, TransactionUnspentOutput } from '@mesh/core';
+} from '../common/utils/index.js';
+import type { Address, TransactionUnspentOutput } from '../core/index.js';
 import type {
   Asset,
   AssetExtended,
   DataSignature,
   UTxO,
   Wallet,
-} from '@mesh/common/types';
+} from '../common/types/index.js';
 
 /**
  * These wallets APIs are in accordance to CIP-30, which defines the API for dApps to communicate with the user's wallet. Additional utility functions provided for developers that are useful for building dApps.

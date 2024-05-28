@@ -1,4 +1,4 @@
-import { csl } from '.';
+import { csl } from './CSL.js';
 
 export * as csl from '@emurgo/cardano-serialization-lib-nodejs';
 
@@ -35,11 +35,15 @@ export type Ed25519Signature = InstanceType<typeof csl.Ed25519Signature>;
 export type EnterpriseAddress = InstanceType<typeof csl.EnterpriseAddress>;
 export type ExUnitPrices = InstanceType<typeof csl.ExUnitPrices>;
 export type ExUnits = InstanceType<typeof csl.ExUnits>;
-export type GeneralTransactionMetadata = InstanceType<typeof csl.GeneralTransactionMetadata>;
+export type GeneralTransactionMetadata = InstanceType<
+  typeof csl.GeneralTransactionMetadata
+>;
 export type GenesisDelegateHash = InstanceType<typeof csl.GenesisDelegateHash>;
 export type GenesisHash = InstanceType<typeof csl.GenesisHash>;
 export type GenesisHashes = InstanceType<typeof csl.GenesisHashes>;
-export type GenesisKeyDelegation = InstanceType<typeof csl.GenesisKeyDelegation>;
+export type GenesisKeyDelegation = InstanceType<
+  typeof csl.GenesisKeyDelegation
+>;
 export type Header = InstanceType<typeof csl.Header>;
 export type HeaderBody = InstanceType<typeof csl.HeaderBody>;
 export type Int = InstanceType<typeof csl.Int>;
@@ -49,9 +53,13 @@ export type KESSignature = InstanceType<typeof csl.KESSignature>;
 export type KESVKey = InstanceType<typeof csl.KESVKey>;
 export type Language = InstanceType<typeof csl.Language>;
 export type Languages = InstanceType<typeof csl.Languages>;
-export type LegacyDaedalusPrivateKey = InstanceType<typeof csl.LegacyDaedalusPrivateKey>;
+export type LegacyDaedalusPrivateKey = InstanceType<
+  typeof csl.LegacyDaedalusPrivateKey
+>;
 export type LinearFee = InstanceType<typeof csl.LinearFee>;
-export type MIRToStakeCredentials = InstanceType<typeof csl.MIRToStakeCredentials>;
+export type MIRToStakeCredentials = InstanceType<
+  typeof csl.MIRToStakeCredentials
+>;
 export type MetadataList = InstanceType<typeof csl.MetadataList>;
 export type MetadataMap = InstanceType<typeof csl.MetadataMap>;
 export type Mint = InstanceType<typeof csl.Mint>;
@@ -59,8 +67,12 @@ export type MintAssets = InstanceType<typeof csl.MintAssets>;
 export type MintBuilder = InstanceType<typeof csl.MintBuilder>;
 export type MintWitness = InstanceType<typeof csl.MintWitness>;
 export type MintsAssets = InstanceType<typeof csl.MintsAssets>;
-export type MoveInstantaneousReward = InstanceType<typeof csl.MoveInstantaneousReward>;
-export type MoveInstantaneousRewardsCert = InstanceType<typeof csl.MoveInstantaneousRewardsCert>;
+export type MoveInstantaneousReward = InstanceType<
+  typeof csl.MoveInstantaneousReward
+>;
+export type MoveInstantaneousRewardsCert = InstanceType<
+  typeof csl.MoveInstantaneousRewardsCert
+>;
 export type MultiAsset = InstanceType<typeof csl.MultiAsset>;
 export type MultiHostName = InstanceType<typeof csl.MultiHostName>;
 export type NativeScript = InstanceType<typeof csl.NativeScript>;
@@ -85,7 +97,9 @@ export type PoolParams = InstanceType<typeof csl.PoolParams>;
 export type PoolRegistration = InstanceType<typeof csl.PoolRegistration>;
 export type PoolRetirement = InstanceType<typeof csl.PoolRetirement>;
 export type PrivateKey = InstanceType<typeof csl.PrivateKey>;
-export type ProposedProtocolParameterUpdates = InstanceType<typeof csl.ProposedProtocolParameterUpdates>;
+export type ProposedProtocolParameterUpdates = InstanceType<
+  typeof csl.ProposedProtocolParameterUpdates
+>;
 export type ProtocolParamUpdate = InstanceType<typeof csl.ProtocolParamUpdate>;
 export type ProtocolVersion = InstanceType<typeof csl.ProtocolVersion>;
 export type PublicKey = InstanceType<typeof csl.PublicKey>;
@@ -118,21 +132,41 @@ export type Transaction = InstanceType<typeof csl.Transaction>;
 export type TransactionBodies = InstanceType<typeof csl.TransactionBodies>;
 export type TransactionBody = InstanceType<typeof csl.TransactionBody>;
 export type TransactionBuilder = InstanceType<typeof csl.TransactionBuilder>;
-export type TransactionBuilderConfig = InstanceType<typeof csl.TransactionBuilderConfig>;
-export type TransactionBuilderConfigBuilder = InstanceType<typeof csl.TransactionBuilderConfigBuilder>;
+export type TransactionBuilderConfig = InstanceType<
+  typeof csl.TransactionBuilderConfig
+>;
+export type TransactionBuilderConfigBuilder = InstanceType<
+  typeof csl.TransactionBuilderConfigBuilder
+>;
 export type TransactionHash = InstanceType<typeof csl.TransactionHash>;
 export type TransactionInput = InstanceType<typeof csl.TransactionInput>;
 export type TransactionInputs = InstanceType<typeof csl.TransactionInputs>;
-export type TransactionMetadatum = InstanceType<typeof csl.TransactionMetadatum>;
-export type TransactionMetadatumLabels = InstanceType<typeof csl.TransactionMetadatumLabels>;
+export type TransactionMetadatum = InstanceType<
+  typeof csl.TransactionMetadatum
+>;
+export type TransactionMetadatumLabels = InstanceType<
+  typeof csl.TransactionMetadatumLabels
+>;
 export type TransactionOutput = InstanceType<typeof csl.TransactionOutput>;
-export type TransactionOutputAmountBuilder = InstanceType<typeof csl.TransactionOutputAmountBuilder>;
-export type TransactionOutputBuilder = InstanceType<typeof csl.TransactionOutputBuilder>;
+export type TransactionOutputAmountBuilder = InstanceType<
+  typeof csl.TransactionOutputAmountBuilder
+>;
+export type TransactionOutputBuilder = InstanceType<
+  typeof csl.TransactionOutputBuilder
+>;
 export type TransactionOutputs = InstanceType<typeof csl.TransactionOutputs>;
-export type TransactionUnspentOutput = InstanceType<typeof csl.TransactionUnspentOutput>;
-export type TransactionUnspentOutputs = InstanceType<typeof csl.TransactionUnspentOutputs>;
-export type TransactionWitnessSet = InstanceType<typeof csl.TransactionWitnessSet>;
-export type TransactionWitnessSets = InstanceType<typeof csl.TransactionWitnessSets>;
+export type TransactionUnspentOutput = InstanceType<
+  typeof csl.TransactionUnspentOutput
+>;
+export type TransactionUnspentOutputs = InstanceType<
+  typeof csl.TransactionUnspentOutputs
+>;
+export type TransactionWitnessSet = InstanceType<
+  typeof csl.TransactionWitnessSet
+>;
+export type TransactionWitnessSets = InstanceType<
+  typeof csl.TransactionWitnessSets
+>;
 export type TxBuilderConstants = InstanceType<typeof csl.TxBuilderConstants>;
 export type TxInputsBuilder = InstanceType<typeof csl.TxInputsBuilder>;
 export type URL = InstanceType<typeof csl.URL>;

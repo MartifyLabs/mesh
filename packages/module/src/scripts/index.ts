@@ -1,1 +1,1 @@
-export * from './forge.script';
+export * from './forge.script.js';

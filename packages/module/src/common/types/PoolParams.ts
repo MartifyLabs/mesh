@@ -1,4 +1,4 @@
-import { Relay } from './Relay';
+import { Relay } from './Relay.js';
 
 export type PoolParams = {
   VRFKeyHash: string;

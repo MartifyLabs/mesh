@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { fromUTF8 } from './converter';
-import { POLICY_ID_LENGTH } from '../constants';
+import { fromUTF8 } from './converter.js';
+import { POLICY_ID_LENGTH } from '../constants.js';
 
 export const parseAssetUnit = (unit: string) => {
   const policyId = unit.slice(0, POLICY_ID_LENGTH);

@@ -1,7 +1,8 @@
 import {
-  deserializePlutusData, fromPlutusData,
-} from '@mesh/common/utils';
-import type { Data } from '@mesh/common/types';
+  deserializePlutusData,
+  fromPlutusData,
+} from '../../common/utils/index.js';
+import type { Data } from '../../common/types/index.js';
 
 export const readPlutusData = (plutusData: string): Data => {
   return fromPlutusData(deserializePlutusData(plutusData));

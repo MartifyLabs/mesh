@@ -20,6 +20,7 @@ import {
 } from '@meshsdk/mesh-csl';
 import blueprint from './aiken-workspace/plutus.json';
 import {
+  Data,
   Quantity,
   UTxO,
   Unit,
@@ -88,7 +89,8 @@ export class MeshMarketplaceContract extends MeshTxInitiator {
 
     await this.mesh
       .txOut(scriptAddr, tokenForSale)
-      .txOutInlineDatumValue(outputDatum, 'JSON')
+      // TODO: remove dodgy cast
+      .txOutInlineDatumValue(outputDatum as unknown as Data, 'JSON')
       .changeAddress(walletAddress)
       .selectUtxosFrom(selectedUtxos)
       .complete();
@@ -225,7 +227,8 @@ export class MeshMarketplaceContract extends MeshTxInitiator {
       .spendingReferenceTxInRedeemerValue(mConStr1([]))
       .txInScript(this.scriptCbor)
       .txOut(scriptAddr, tokenForSale)
-      .txOutInlineDatumValue(outputDatum, 'JSON')
+      // TODO: remove dodgy cast
+      .txOutInlineDatumValue(outputDatum as unknown as Data, 'JSON')
       .changeAddress(walletAddress)
       .requiredSignerHash(serializeBech32Address(walletAddress).pubKeyHash)
       .txInCollateral(

@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import { IEvaluator, IFetcher, ISubmitter } from '@mesh/common/contracts';
+import { IEvaluator, IFetcher, ISubmitter } from '../common/contracts/index.js';
 import {
   parseAssetUnit,
   parseHttpError,
   resolveRewardAddress,
   toBytes,
   toScriptRef,
-} from '@mesh/common/utils';
+} from '../common/utils/index.js';
 import type {
   AccountInfo,
   Action,
@@ -18,8 +18,8 @@ import type {
   Protocol,
   TransactionInfo,
   UTxO,
-} from '@mesh/common/types';
-import { csl } from '@mesh/core';
+} from '../common/types/index.js';
+import { csl } from '../core/index.js';
 
 export type MaestroSupportedNetworks = 'Mainnet' | 'Preprod' | 'Preview';
 
@@ -31,12 +31,11 @@ export interface MaestroConfig {
 
 export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
   private readonly _axiosInstance: AxiosInstance;
-  private readonly _amountsAsStrings =
-    {
-      headers: {
-        "amounts-as-strings": "true"
-      }
-    }
+  private readonly _amountsAsStrings = {
+    headers: {
+      'amounts-as-strings': 'true',
+    },
+  };
 
   submitUrl: string;
 
@@ -83,7 +82,8 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
 
     try {
       const { data: timestampedData, status } = await this._axiosInstance.get(
-        `accounts/${rewardAddress}`, this._amountsAsStrings
+        `accounts/${rewardAddress}`,
+        this._amountsAsStrings
       );
 
       if (status === 200) {
@@ -119,7 +119,8 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
     ): Promise<UTxO[]> => {
       const appendCursorString = cursor === null ? '' : `&cursor=${cursor}`;
       const { data: timestampedData, status } = await this._axiosInstance.get(
-        `${queryPredicate}/utxos?count=100${appendAssetString}${appendCursorString}`, this._amountsAsStrings
+        `${queryPredicate}/utxos?count=100${appendAssetString}${appendCursorString}`,
+        this._amountsAsStrings
       );
       if (status === 200) {
         const data = timestampedData.data;
@@ -151,7 +152,8 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
     ): Promise<{ address: string; quantity: string }[]> => {
       const appendCursorString = cursor === null ? '' : `&cursor=${cursor}`;
       const { data: timestampedData, status } = await this._axiosInstance.get(
-        `assets/${policyId}${assetName}/addresses?count=100${appendCursorString}`, this._amountsAsStrings
+        `assets/${policyId}${assetName}/addresses?count=100${appendCursorString}`,
+        this._amountsAsStrings
       );
       if (status === 200) {
         const data = timestampedData.data;
@@ -205,7 +207,8 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
   async fetchBlockInfo(hash: string): Promise<BlockInfo> {
     try {
       const { data: timestampedData, status } = await this._axiosInstance.get(
-        `blocks/${hash}`, this._amountsAsStrings
+        `blocks/${hash}`,
+        this._amountsAsStrings
       );
 
       if (status === 200) {
@@ -241,7 +244,8 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
   ): Promise<{ assets: Asset[]; next: string | number | null }> {
     try {
       const { data: timestampedData, status } = await this._axiosInstance.get(
-        `policy/${policyId}/assets?count=100${cursor ? `&cursor=${cursor}` : ''
+        `policy/${policyId}/assets?count=100${
+          cursor ? `&cursor=${cursor}` : ''
         }`
       );
 
@@ -370,7 +374,8 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
   async fetchUTxOs(hash: string): Promise<UTxO[]> {
     try {
       const { data: timestampedData, status } = await this._axiosInstance.get(
-        `transactions/${hash}`, this._amountsAsStrings
+        `transactions/${hash}`,
+        this._amountsAsStrings
       );
       if (status === 200) {
         const msOutputs = timestampedData.data.outputs as MaestroUTxO[];
@@ -449,9 +454,9 @@ export class MaestroProvider implements IFetcher, ISubmitter, IEvaluator {
         utxo.reference_script.type === 'native'
           ? <NativeScript>utxo.reference_script.json
           : <PlutusScript>{
-            code: utxo.reference_script.bytes,
-            version: utxo.reference_script.type.replace('plutusv', 'V'),
-          };
+              code: utxo.reference_script.bytes,
+              version: utxo.reference_script.type.replace('plutusv', 'V'),
+            };
       return toScriptRef(script).to_hex();
     } else return undefined;
   };

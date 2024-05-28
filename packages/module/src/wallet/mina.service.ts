@@ -1,7 +1,7 @@
 import axios from 'axios';
-import type { UTxO } from '@mesh/common/types';
-import { deserializeTx } from '@mesh/common/utils';
-import { csl } from '@mesh/core';
+import type { UTxO } from '../common/types/index.js';
+import { deserializeTx } from '../common/utils/index.js';
+import { csl } from '../core/index.js';
 const minaFrontendUrl = 'http://localhost:4000/';
 const minaBackendUrl = 'http://localhost:5000/';
 const loginUrl = `${minaFrontendUrl}access`;

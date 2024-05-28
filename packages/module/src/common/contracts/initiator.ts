@@ -1,4 +1,4 @@
-import type { Address, TransactionUnspentOutput } from '@mesh/core';
+import type { Address, TransactionUnspentOutput } from '../../core/index.js';
 
 export interface IInitiator {
   getUsedAddress(): SometimesPromise<Address>;

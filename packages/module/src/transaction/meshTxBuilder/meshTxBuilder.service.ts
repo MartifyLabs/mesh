@@ -1,7 +1,16 @@
-import { IEvaluator, IFetcher, ISubmitter } from '@mesh/common/contracts';
-import { UTxO } from '@mesh/common/types';
-import { MeshTxBuilderCore } from './meshTxBuilderCore';
-import { MeshTxBuilderBody, TxIn, ScriptSourceInfo, ScriptTxIn } from './type';
+import {
+  IEvaluator,
+  IFetcher,
+  ISubmitter,
+} from '../../common/contracts/index.js';
+import { UTxO } from '../../common/types/index.js';
+import { MeshTxBuilderCore } from './meshTxBuilderCore.js';
+import {
+  MeshTxBuilderBody,
+  TxIn,
+  ScriptSourceInfo,
+  ScriptTxIn,
+} from './type.js';
 
 // Delay action at complete
 // 1. Query blockchain for any missing information

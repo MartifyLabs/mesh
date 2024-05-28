@@ -1,9 +1,9 @@
-import { csl } from '@mesh/core';
+import { csl } from '../../core/index.js';
 import {
   LANGUAGE_VERSIONS,
   POLICY_ID_LENGTH,
   REDEEMER_TAGS,
-} from '@mesh/common/constants';
+} from '../../common/constants.js';
 import {
   deserializeDataHash,
   deserializeEd25519KeyHash,
@@ -12,7 +12,7 @@ import {
   deserializeScriptHash,
   deserializeScriptRef,
   deserializeTxHash,
-} from './deserializer';
+} from './deserializer.js';
 import type {
   PlutusData,
   PlutusList,
@@ -21,7 +21,7 @@ import type {
   ScriptRef,
   TransactionUnspentOutput,
   Value,
-} from '@mesh/core';
+} from '../../core/index.js';
 import type {
   Action,
   Asset,
@@ -31,7 +31,7 @@ import type {
   PoolParams,
   Relay,
   UTxO,
-} from '@mesh/common/types';
+} from '../../common/types/index.js';
 
 /* -----------------[ Address ]----------------- */
 

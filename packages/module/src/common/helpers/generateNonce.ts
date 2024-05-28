@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import { fromUTF8 } from '@mesh/common/utils';
+import { fromUTF8 } from '../../common/utils/index.js';
 
 export const generateNonce = (label = '', length = 32) => {
   if (length <= 0 || length > 2048) {
