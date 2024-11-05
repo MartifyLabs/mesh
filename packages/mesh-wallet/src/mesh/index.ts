@@ -27,6 +27,7 @@ import {
   toAddress,
   toTxUnspentOutput,
   TransactionUnspentOutput,
+  VkeyWitness,
 } from "@meshsdk/core-cst";
 import { Transaction } from "@meshsdk/transaction";
 
@@ -334,7 +335,7 @@ export class MeshWallet implements IInitiator, ISigner, ISubmitter {
    * @param partialSign - if the transaction is partially signed (default: false)
    * @returns a signed transaction in CBOR
    */
-  signTx(unsignedTx: string, partialSign = false): string {
+  signTx(unsignedTx: string, partialSign = false, useStake=false): string {
     if (!this._wallet) {
       throw new Error(
         "[MeshWallet] Read only wallet does not support signing data.",
@@ -350,14 +351,21 @@ export class MeshWallet implements IInitiator, ISigner, ISubmitter {
       throw new Error(
         "Signatures already exist in the transaction in a non partial sign call",
       );
-
-    const newSignatures = this._wallet.signTx(
+      const newSignatures:VkeyWitness[] = [ this._wallet.signTx(
       unsignedTx,
       this._accountIndex,
       this._keyIndex,
-    );
+    )];
+    if (useStake) {
+      newSignatures.push(this._wallet.signTx(
+        unsignedTx,
+        this._accountIndex,
+        this._keyIndex,
+        true
+      ));
+    }
 
-    let signedTx = EmbeddedWallet.addWitnessSets(unsignedTx, [newSignatures]);
+    let signedTx = EmbeddedWallet.addWitnessSets(unsignedTx, newSignatures);
     return signedTx;
   }
 

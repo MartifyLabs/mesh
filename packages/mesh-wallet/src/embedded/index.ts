@@ -281,16 +281,17 @@ export class EmbeddedWallet extends WalletStaticMethods {
     }
   }
 
-  signTx(unsignedTx: string, accountIndex = 0, keyIndex = 0): VkeyWitness {
+  signTx(unsignedTx: string, accountIndex = 0, keyIndex = 0, useStake=false): VkeyWitness {
     try {
       const txHash = deserializeTxHash(resolveTxHash(unsignedTx));
 
-      const { paymentKey } = this.getAccount(accountIndex, keyIndex);
+      const { paymentKey, stakeKey } = this.getAccount(accountIndex, keyIndex);
 
+      const useKey = useStake ? stakeKey : paymentKey
       const vKeyWitness = new VkeyWitness(
-        Ed25519PublicKeyHex(paymentKey.toPublicKey().toBytes().toString("hex")),
+        Ed25519PublicKeyHex(useKey.toPublicKey().toBytes().toString("hex")),
         Ed25519SignatureHex(
-          paymentKey.sign(Buffer.from(txHash, "hex")).toString("hex"),
+          useKey.sign(Buffer.from(txHash, "hex")).toString("hex"),
         ),
       );
 
