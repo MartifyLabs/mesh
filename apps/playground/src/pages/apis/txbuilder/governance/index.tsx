@@ -35,12 +35,15 @@ const ReactPage: NextPage = () => {
           heroicon={metaTxbuilderGovernance.icon}
         >
           <p>
-            In{" "}
-            <Link href="https://cips.cardano.org/cip/cip-1694">CIP-1694</Link>,
-            Cardano's on-chain governance system was proposed to allow the
-            community to vote on proposals and protocol updates. This system is
-            designed to be decentralized and transparent, allowing the community
-            to have a say in the future of the network.
+            The implementation of {" "}
+            <Link href="https://cips.cardano.org/cip/cip-1694">CIP-1694 | A 
+            First Step Towards On-Chain Decentralized Governance</Link> within
+            the Conway ledger era is Cardano's initial on-chain governance
+            design. This system was allows the community to vote on how the
+            chain is managed, such as how treasury funds are spent and changes
+            to protocol parameters. This system is designed to be decentralized
+            and transparent, allowing the community to decide the future of the
+            network.
           </p>
           <Intro />
           <p>

@@ -50,8 +50,8 @@ function Left() {
       <p>
         A DRep is retired right away when the blockchain accepts a retirement
         certificate. The deposit is refunded immediately as part of the
-        transaction that submits the retirement certificate, just like how
-        deposits are returned when a stake credential is unregistered.
+        output of the transaction that submits the retirement certificate, just
+        like how deposits are returned when using a Conway stake deregistration.
       </p>
       <p>
         First we need to get the DRep ID of the DRep we want to retire. We can
@@ -77,7 +77,7 @@ function Left() {
       <Codeblock data={codeSign} />
       <p>
         The transaction will be submitted to the blockchain and the DRep will be
-        retired. The deposit will be refunded to the DRep owner.
+        retired. The deposit will be refunded to the provided change address.
       </p>
     </>
   );

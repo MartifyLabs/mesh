@@ -69,25 +69,27 @@ function Left() {
   return (
     <>
       <p>
-        In Voltaire, stake credentials can delegate their stake to Decentralized
-        Representatives (DReps) for voting, in addition to the current
-        delegation to stake pools for block production. This DRep delegation
-        will work similarly to the current stake delegation process, using
-        on-chain certificates. Registering as a DRep will also follow the same
-        process as stake registration.
+        In Conway, stake credentials can delegate the voting rights associated
+        with their to ada to Delegate Representatives (DReps) to empower the
+        DRep's votes, this mechanism is in addition to the current delegation to
+        stake pools to participate in consensus and block production. This vote 
+        delegation is modeled on current stake delegation process, using
+        on-chain certificates. Registering as a DRep also follows the same
+        process as stake pool registration.
       </p>
       <p>
-        However, registered DReps need to vote regularly to remain active. If a
-        DRep does not vote for a set number of epochs (defined by the new
-        protocol parameter, drepActivity), they are considered inactive and will
-        not count towards the active voting stake. To become active again, DReps
-        need to vote on governance actions or submit a DRep update certificate
-        within the drepActivity period.
+        However, registered DReps need to vote or provide updates regularly to
+        counted as active. If a DRep does not vote or submit a DRep update 
+        certificate for a set number of epochs (defined by the new protocol
+        parameter, drepActivity), they are considered inactive and the voting
+        power delegated to them is not counted towards the active voting stake.
+        To become active again, DReps need to vote on governance actions or
+        submit a DRep update certificate within the drepActivity period.
       </p>
 
       <p>A DRep registration certificates include:</p>
       <ul>
-        <li>a DRep ID</li>
+        <li>a DRep credential (DRep ID)</li>
         <li>a deposit</li>
         <li>an optional anchor</li>
       </ul>
@@ -112,7 +114,7 @@ function Left() {
       <p>
         Then, we select the UTxOs to pay for the registration. According to the
         current protocol parameters, the deposit for registering a DRep is 500
-        ADA.
+        ada.
       </p>
       <Codeblock data={codeUtxo} />
       <p>
@@ -127,8 +129,8 @@ function Left() {
       <Codeblock data={codeBuildSign} />
       <p>
         The transaction will be submitted to the blockchain and the DRep will be
-        registered. The deposit will be taken from the DRep owner and the DRep
-        will be added to the list of registered DReps.
+        registered. The deposit will be taken from the wallet which controls 
+        the DRep and the DRep will be added to the list of registered DReps.
       </p>
     </>
   );
