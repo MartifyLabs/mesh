@@ -24,7 +24,7 @@ import {
  * const scriptCbor = blueprint.cbor;
  * const scriptAddress = blueprint.address;
  */
-class SpendingBlueprint implements ISpendingBlueprint {
+export class SpendingBlueprint implements ISpendingBlueprint {
   version: LanguageVersion;
   networkId: number;
   cbor: string;

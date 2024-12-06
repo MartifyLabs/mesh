@@ -20,7 +20,7 @@ import { resolveScriptHash } from "../resolver";
  * const policyId = blueprint.hash;
  * const scriptCbor = blueprint.cbor;
  */
-class MintingBlueprint implements IMintingBlueprint {
+export class MintingBlueprint implements IMintingBlueprint {
   version: LanguageVersion;
   cbor: string;
   hash: string;

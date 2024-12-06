@@ -21,7 +21,7 @@ import { resolveScriptHash } from "../resolver";
  * const scriptCbor = blueprint.cbor;
  * const rewardAddress = blueprint.address;
  */
-class WithdrawalBlueprint implements IWithdrawalBlueprint {
+export class WithdrawalBlueprint implements IWithdrawalBlueprint {
   version: LanguageVersion;
   networkId: number;
   cbor: string;
