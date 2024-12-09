@@ -26,7 +26,7 @@ export default function SubmenuItemDropdown({
       <Link href={link ?? "#"}>
         <button
           type="button"
-          className="hover:text-primary-600 dark:hover:text-primary-500 flex w-full items-center justify-between px-4 py-2"
+          className="hover:text-black dark:hover:text-white flex w-full items-center justify-between px-4 py-2"
         >
           <span className="flex items-center">
             {icon && React.createElement(icon, { className: "mr-2 w-4 h-4" })}
@@ -71,7 +71,7 @@ function Item({
     <li>
       <Link
         href={link}
-        className="hover:text-primary-600 dark:hover:text-primary-500 flex w-full items-center px-4 py-2"
+        className="hover:text-black dark:hover:text-white flex w-full items-center px-4 py-2"
       >
         {icon && React.createElement(icon, { className: "mr-2 w-4 h-4" })}
         {title}

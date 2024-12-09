@@ -1,11 +1,11 @@
 import TwoColumnsScroll from "~/components/sections/two-columns-scroll";
 import Codeblock from "~/components/text/codeblock";
 
-export default function SvelteInstall() {
+export default function SvelteSetup() {
   return (
     <TwoColumnsScroll
-      sidebarTo="svelteInstall"
-      title="Install"
+      sidebarTo="svelteSetup"
+      title="Setup"
       leftSection={Left()}
     />
   );
@@ -22,7 +22,20 @@ function Left() {
 
   return (
     <>
-      <p>To start, install:</p>
+      <p>
+        The fastest way to get started a new project with Svelte is to use the
+        Mesh-CLI, which will scaffold a new project for you. To do this, run the
+        following:
+      </p>
+      <Codeblock data={`npx meshjs your-app-name`} />
+
+      <p>
+        During the installation process, you will be asked to choose a template.
+        Choose the Svelte template. This will scaffold a new Svelte project with
+        Mesh pre-installed.
+      </p>
+
+      <p>To manually, install the Mesh Svelte package, run the following:</p>
       <Codeblock data={`npm install @meshsdk/svelte`} />
 
       <p>

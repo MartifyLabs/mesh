@@ -58,8 +58,8 @@ export default function SectionIntro() {
           </h2>
           <p className="mb-8 font-light lg:text-xl"></p>
           <div className="mb-6 border-b border-t border-gray-200 py-8 dark:border-gray-700">
-            {features.map((feature) => (
-              <div className="flex pb-8">
+            {features.map((feature, i) => (
+              <div className="flex pb-8" key={i}>
                 <div className="bg-primary-100 dark:bg-primary-900 mr-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
                   <feature.icon className="text-primary-600 dark:text-primary-300 h-5 w-5" />
                 </div>

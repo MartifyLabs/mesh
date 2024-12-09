@@ -25,6 +25,12 @@ Mesh is an open-source library designed to make building dApps accessible. Wheth
 
 Explore the features on [Mesh Playground](https://meshjs.dev/).
 
+Instant setup a new project with a single command using Mesh CLI and start building:
+
+```
+npx meshjs your-app-name
+```
+
 ## What's inside?
 
 ### Architecture Overview
@@ -109,15 +115,7 @@ Here's a list of open-source smart contracts, complete with documentation, live 
 | Swap | Facilitates the exchange of assets between two parties | [[demo](https://meshjs.dev/smart-contracts/swap)] [[source](https://github.com/MeshJS/mesh/tree/main/packages/mesh-contract/src/swap)] [[docs](https://docs.meshjs.dev/contracts/classes/MeshSwapContract)] |
 | Vesting | Allows users to lock tokens for a period of time and withdraw the funds after the lockup period | [[demo](https://meshjs.dev/smart-contracts/vesting)] [[source](https://github.com/MeshJS/mesh/tree/main/packages/mesh-contract/src/vesting)] [[docs](https://docs.meshjs.dev/contracts/classes/MeshVestingContract)] |
 
-## Getting Started
-
-### Usage
-
-To use Mesh in your project, run the following command to install the core package:
-
-```
-npm install @meshsdk/core
-```
+## Usage
 
 ### Install
 

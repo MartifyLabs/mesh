@@ -6,12 +6,12 @@ import Metatags from "~/components/site/metatags";
 import { metaReactGettingstarted } from "~/data/links-react";
 import ReactConnectWallet from "../ui-components/connect-wallet";
 import ReactHookUseWallet from "../wallet-hooks/use-wallet";
-import ReactInstall from "./install";
+import ReactSetup from "./setup";
 import MeshProvider from "./mesh-provider";
 
 const ReactPage: NextPage = () => {
   const sidebarItems = [
-    { label: "Install", to: "reactInstall" },
+    { label: "Setup", to: "reactSetup" },
     { label: "Mesh Provider", to: "meshProvider" },
     { label: "Connect Wallet", to: "connectWallet" },
     { label: "useWallet Hook", to: "useWallet" },
@@ -36,7 +36,7 @@ const ReactPage: NextPage = () => {
           </p>
         </TitleIconDescriptionBody>
 
-        <ReactInstall />
+        <ReactSetup />
         <MeshProvider />
         <ReactConnectWallet />
         <ReactHookUseWallet />

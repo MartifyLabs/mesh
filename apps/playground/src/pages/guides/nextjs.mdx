@@ -3,9 +3,9 @@ import { guidenextjs } from "~/data/links-guides";
 
 export default function MDXPage({ children }) {
   const sidebarItems = [
-    { label: 'System setup', to: 'systemsetup' },
+    { label: 'Setup Next.js', to: 'setupnextjs' },
     { label: 'Setup Mesh', to: 'setupmesh' },
-    { label: 'See it in action', to: 'seeitinaction' },
+    { label: 'Connect wallet and view assets', to: 'connectwalletandviewassets' },
   ];
 
   return (
@@ -21,23 +21,21 @@ export default function MDXPage({ children }) {
   );
 }
 
-In this guide, you will get your application running, [check this demo](https://starter-template.meshjs.dev/) to see the final result.
+In this guide, we will set up a Next.js application and connect it to the Cardano blockchain using Mesh. We will create a simple application that allows users to connect their wallets and view the assets in their wallets.
+
+Though this guide is focused on Next.js which uses [Mesh React](/react) you can also use Mesh with other frameworks like Remix, React, and Vue. Mesh SDK has [Svelte UI components](/svelte) too.
+
+You may follow this guide to setup your project or use the [Mesh CLI](https://meshjs.dev/) to scaffold a new project.
+
+```bash
+npx meshjs your-app-name
+```
+
+## Setup Next.js
 
 [Next.js](https://nextjs.org/) is a web development framework built on top of Node.js enabling React-based web applications functionalities such as server-side rendering and generating static websites.
 
 Next.js and Mesh are JavaScript libraries, and so we will assume that you have some familiarity with HTML and JavaScript language, but you should be able to follow along even if you are coming from a different programming language. If you don't feel very confident, we recommend going through this [JS tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript), or the [MDN JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript) or my preferred method, by watch a few [videos from YouTube](https://www.youtube.com/results?search_query=get+started+with+nextjs).
-
-## System setup
-
-### 1. Visual Studio Code
-
-Visual Studio Code is a code editor made by Microsoft. Download and install [Visual Studio Code](https://code.visualstudio.com/) for code editing.
-
-### 2. Node.js
-
-Node.js is a cross-platform JavaScript runtime environment that runs on the V8 engine and executes JavaScript code. Install the Long-Term Support (LTS) version of [Node.js](https://nodejs.org/) (as of writing v16.16.0).
-
-## Setup Next.js
 
 ### 1. Create project folder and open Visual Studio Code
 
@@ -75,6 +73,8 @@ Visit [http://localhost:3000](http://localhost:3000/) to view your application. 
 
 ## Setup Mesh
 
+Mesh is a JavaScript library that provides a simple way to interact with the Cardano blockchain. It provides a set of APIs that allow you to interact with the Cardano blockchain without having to deal with the complexities of the Cardano blockchain.
+
 ### 1. Install MeshJS package
 
 Install the latest version of Mesh with npm:
@@ -85,7 +85,7 @@ npm install @meshsdk/core @meshsdk/react
 
 ### 2. Add webpack in **next.config.js**
 
-Open **next.config.mjs** and append **webpack** configurations. Your **next.config.mjs** should look like this:
+Open **next.config.ts** and append **webpack** configurations. Your **next.config.ts** should look like this:
 
 ```
 /** @type {import('next').NextConfig} */
@@ -107,7 +107,7 @@ export default nextConfig;
 
 You just saved a few weeks of learning and a number days trying to get started. Your Next.js application is ready to connect wallet, browse assets and make some transactions.
 
-## See it in action
+## Connect wallet and view assets
 
 ### 1. Add **MeshProvider**
 

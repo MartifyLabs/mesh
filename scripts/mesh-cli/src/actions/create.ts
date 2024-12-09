@@ -22,7 +22,7 @@ export const create = async (name, options) => {
   try {
     createDirectory(name);
 
-    logInfo('📡 - Downloading files..., This might take a moment.');
+    logInfo('📡 - Downloading files...');
     await fetchRepository(template);
 
     logInfo('🏠 - Starting a new git repository...');

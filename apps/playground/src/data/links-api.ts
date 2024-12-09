@@ -10,8 +10,8 @@ import { metaWallets } from "./links-wallets";
 
 export const linksApi: MenuItem[] = [
   metaWallets,
-  metaTransaction,
   metaTxbuilder,
+  metaTransaction,
   metaData,
   metaReact,
   metaSvelte,

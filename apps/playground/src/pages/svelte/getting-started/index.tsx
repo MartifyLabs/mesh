@@ -5,12 +5,12 @@ import TitleIconDescriptionBody from "~/components/sections/title-icon-descripti
 import Metatags from "~/components/site/metatags";
 import { metaSvelteGettingstarted } from "~/data/links-svelte";
 import SvelteConnectWallet from "../ui-components/connect-wallet";
-import SvelteInstall from "./install";
+import SvelteSetup from "./setup";
 import SvelteState from "./state";
 
 const SveltePage: NextPage = () => {
   const sidebarItems = [
-    { label: "Install", to: "SvelteInstall" },
+    { label: "Setup", to: "SvelteSetup" },
     { label: "Connect Wallet", to: "connectWallet" },
     { label: "Get Wallet State", to: "svelteState" },
   ];
@@ -34,7 +34,7 @@ const SveltePage: NextPage = () => {
           </p>
         </TitleIconDescriptionBody>
 
-        <SvelteInstall />
+        <SvelteSetup />
         <SvelteConnectWallet />
         <SvelteState />
       </SidebarFullwidth>
