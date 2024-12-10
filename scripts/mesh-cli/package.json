@@ -3,7 +3,7 @@
   "description": "A quick and easy way to bootstrap your dApps on Cardano using Mesh.",
   "homepage": "https://meshjs.dev",
   "author": "MeshJS",
-  "version": "1.7.31",
+  "version": "1.7.33",
   "license": "Apache-2.0",
   "type": "module",
   "main": "./dist/index.cjs",

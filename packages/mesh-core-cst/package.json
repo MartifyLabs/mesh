@@ -1,6 +1,6 @@
 {
   "name": "@meshsdk/core-cst",
-  "version": "1.7.31",
+  "version": "1.7.33",
   "description": "Types and utilities functions between Mesh and cardano-js-sdk",
   "main": "./dist/index.cjs",
   "browser": "./dist/index.js",
@@ -42,7 +42,7 @@
     "@harmoniclabs/cbor": "1.3.0",
     "@harmoniclabs/plutus-data": "1.2.4",
     "@harmoniclabs/uplc": "1.2.4",
-    "@meshsdk/common": "1.7.31",
+    "@meshsdk/common": "1.7.33",
     "@stricahq/bip32ed25519": "^1.1.0",
     "@stricahq/cbors": "^1.0.3",
     "pbkdf2": "^3.1.2"

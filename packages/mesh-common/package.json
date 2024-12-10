@@ -1,6 +1,6 @@
 {
   "name": "@meshsdk/common",
-  "version": "1.7.31",
+  "version": "1.7.33",
   "description": "Contains constants, types and interfaces used across the SDK and different serialization libraries",
   "main": "./dist/index.cjs",
   "browser": "./dist/index.js",

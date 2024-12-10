@@ -1,6 +1,6 @@
 {
   "name": "@meshsdk/core",
-  "version": "1.7.31",
+  "version": "1.7.33",
   "description": "Mesh SDK Core - https://meshjs.dev/",
   "main": "./dist/index.cjs",
   "browser": "./dist/index.js",
@@ -33,13 +33,13 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@meshsdk/common": "1.7.31",
-    "@meshsdk/core-csl": "1.7.31",
-    "@meshsdk/core-cst": "1.7.31",
-    "@meshsdk/provider": "1.7.31",
-    "@meshsdk/react": "1.7.31",
-    "@meshsdk/transaction": "1.7.31",
-    "@meshsdk/wallet": "1.7.31"
+    "@meshsdk/common": "1.7.33",
+    "@meshsdk/core-csl": "1.7.33",
+    "@meshsdk/core-cst": "1.7.33",
+    "@meshsdk/provider": "1.7.33",
+    "@meshsdk/react": "1.7.33",
+    "@meshsdk/transaction": "1.7.33",
+    "@meshsdk/wallet": "1.7.33"
   },
   "prettier": "@meshsdk/configs/prettier",
   "publishConfig": {

@@ -1,6 +1,6 @@
 {
   "name": "@meshsdk/transaction",
-  "version": "1.7.31",
+  "version": "1.7.33",
   "description": "Transactions - https://meshjs.dev/apis/transaction",
   "main": "./dist/index.cjs",
   "browser": "./dist/index.js",
@@ -35,9 +35,9 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@meshsdk/common": "1.7.31",
-    "@meshsdk/core-csl": "1.7.31",
-    "@meshsdk/core-cst": "1.7.31",
+    "@meshsdk/common": "1.7.33",
+    "@meshsdk/core-csl": "1.7.33",
+    "@meshsdk/core-cst": "1.7.33",
     "json-bigint": "^1.0.0"
   },
   "prettier": "@meshsdk/configs/prettier",

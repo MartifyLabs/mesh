@@ -34,8 +34,8 @@ export default function ConnectedButton() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Wallet</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuLabel>Wallet</DropdownMenuLabel>
+        <DropdownMenuSeparator /> */}
         <DropdownMenuItem
           onClick={() => {
             navigator.clipboard.writeText(address);

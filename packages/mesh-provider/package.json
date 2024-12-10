@@ -1,6 +1,6 @@
 {
   "name": "@meshsdk/provider",
-  "version": "1.7.31",
+  "version": "1.7.33",
   "description": "Blockchain data providers - https://meshjs.dev/providers",
   "main": "./dist/index.cjs",
   "browser": "./dist/index.js",
@@ -34,8 +34,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@meshsdk/common": "1.7.31",
-    "@meshsdk/core-cst": "1.7.31",
+    "@meshsdk/common": "1.7.33",
+    "@meshsdk/core-cst": "1.7.33",
     "@utxorpc/sdk": "0.6.2",
     "@utxorpc/spec": "0.10.1",
     "axios": "^1.7.2"
