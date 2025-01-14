@@ -77,7 +77,7 @@ fn get_complete_test_tx() -> Transaction {
     |> complete()
 }
 
-test success_complete() {
+test excessive_ex_unit_with_unbound_value() {
   let output_reference = mock_utxo_ref(0, 1)
   let unused_mock_datum = Some(initiation_datum())
   let redeemer = CompleteTrade
