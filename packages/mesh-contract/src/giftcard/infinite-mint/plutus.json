@@ -1,0 +1,165 @@
+{
+  "preamble": {
+    "title": "meshjs/giftcard",
+    "description": "Aiken contracts for project 'meshjs/giftcard'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.9+2217206"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "oneshot.gift_card.mint",
+      "redeemer": {
+        "title": "rdmr",
+        "schema": {
+          "$ref": "#/definitions/oneshot~1Action"
+        }
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "utxo_ref",
+          "schema": {
+            "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+          }
+        }
+      ],
+      "compiledCode": "59020801010032323232323232232225333005323232323253323300b3001300c3754004264646464a66601e600a0022a66602460226ea801c0085854ccc03cc00c00454ccc048c044dd50038010b0b18079baa00613232323253330113007301237540022646464a6660286014602a6ea803054ccc050c028c054dd5191980080080391299980c8008a6103d87a80001332253330183375e603a60346ea80080544c024cc0700092f5c0266008008002603600260380022a6660286010002266e3c0080485280b0a99980a19b87001480044cdc78010090a50375a602a0046eb8c04c004c8cdd8180b800980b980c0009bac3016301337540022c646600200264a666024600c60266ea800452f5bded8c026eacc05cc050dd500099198008009bab3017301830183018301800522533301600114c0103d87a80001323332225333017337220180062a66602e66e3c03000c4c020cc06cdd300125eb80530103d87a8000133006006001375c602a0026eacc058004c068008c060004894ccc054004530103d87a80001332253330143371e6eb8c0540080484c014cc060dd39980c180a8011980c180b00125eb812f5c0266008008002602e00260300026e95200037586026002601e6ea8018dc3a40046eb8c040c034dd50011b874800058c038c03c00cc034008c030008c030004c01cdd50008a4c26cac6eb80055cd2ab9d5573caae7d5d02ba157441",
+      "hash": "19506af172dfbfb5ef6de511a1468f6909c05edacaf44e2a09ee1785"
+    },
+    {
+      "title": "oneshot.gift_card.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "utxo_ref",
+          "schema": {
+            "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+          }
+        }
+      ],
+      "compiledCode": "59020801010032323232323232232225333005323232323253323300b3001300c3754004264646464a66601e600a0022a66602460226ea801c0085854ccc03cc00c00454ccc048c044dd50038010b0b18079baa00613232323253330113007301237540022646464a6660286014602a6ea803054ccc050c028c054dd5191980080080391299980c8008a6103d87a80001332253330183375e603a60346ea80080544c024cc0700092f5c0266008008002603600260380022a6660286010002266e3c0080485280b0a99980a19b87001480044cdc78010090a50375a602a0046eb8c04c004c8cdd8180b800980b980c0009bac3016301337540022c646600200264a666024600c60266ea800452f5bded8c026eacc05cc050dd500099198008009bab3017301830183018301800522533301600114c0103d87a80001323332225333017337220180062a66602e66e3c03000c4c020cc06cdd300125eb80530103d87a8000133006006001375c602a0026eacc058004c068008c060004894ccc054004530103d87a80001332253330143371e6eb8c0540080484c014cc060dd39980c180a8011980c180b00125eb812f5c0266008008002602e00260300026e95200037586026002601e6ea8018dc3a40046eb8c040c034dd50011b874800058c038c03c00cc034008c030008c030004c01cdd50008a4c26cac6eb80055cd2ab9d5573caae7d5d02ba157441",
+      "hash": "19506af172dfbfb5ef6de511a1468f6909c05edacaf44e2a09ee1785"
+    },
+    {
+      "title": "oneshot.redeem.spend",
+      "datum": {
+        "title": "_d",
+        "schema": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "redeemer": {
+        "title": "_r",
+        "schema": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "policy_id",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        }
+      ],
+      "compiledCode": "59011501010032323232323232232232253330063232323232533300b3370e900118061baa001132332232325333013301600213253330113370e6eb4c04c009200113371e00201e2940dd718088008b180a00099299980799b8748008c040dd50008a5eb7bdb1804dd5980a18089baa001323300100137566028602a602a602a602a60226ea801c894ccc04c004530103d87a80001323332225333014337220200062a66602866e3c04000c4cdd2a4000660306e980092f5c02980103d87a8000133006006001375c60240026eacc04c004c05c008c054004c044004c044c048004c034dd50008b1807980800198070011806801180680098041baa00114984d958dd70009bae0015734aae7555cf2ab9f5740ae855d101",
+      "hash": "7ba2294c3a7451e9335d380ddd5574371de80524dd828c467ecd4c5e"
+    },
+    {
+      "title": "oneshot.redeem.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "policy_id",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        }
+      ],
+      "compiledCode": "59011501010032323232323232232232253330063232323232533300b3370e900118061baa001132332232325333013301600213253330113370e6eb4c04c009200113371e00201e2940dd718088008b180a00099299980799b8748008c040dd50008a5eb7bdb1804dd5980a18089baa001323300100137566028602a602a602a602a60226ea801c894ccc04c004530103d87a80001323332225333014337220200062a66602866e3c04000c4cdd2a4000660306e980092f5c02980103d87a8000133006006001375c60240026eacc04c004c05c008c054004c044004c044c048004c034dd50008b1807980800198070011806801180680098041baa00114984d958dd70009bae0015734aae7555cf2ab9f5740ae855d101",
+      "hash": "7ba2294c3a7451e9335d380ddd5574371de80524dd828c467ecd4c5e"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Data": {
+      "title": "Data",
+      "description": "Any Plutus data."
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "cardano/transaction/OutputReference": {
+      "title": "OutputReference",
+      "description": "An `OutputReference` is a unique reference to an output on-chain. The `output_index`\n corresponds to the position in the output list of the transaction (identified by its id)\n that produced that output",
+      "anyOf": [
+        {
+          "title": "OutputReference",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "transaction_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "output_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "oneshot/Action": {
+      "title": "Action",
+      "anyOf": [
+        {
+          "title": "Mint",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Burn",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    }
+  }
+}
