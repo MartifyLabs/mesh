@@ -65,7 +65,7 @@ fn get_mint_test_tx(test_case: TestCase) -> Transaction {
     |> complete()
 }
 
-test success_mint() {
+test success_infinite_mint() {
   let test_gift_card_name = "hello world"
   let utxo = mock_utxo_ref(0, 0)
   let test_case = TestCase { is_multiple_mint: True }

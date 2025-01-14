@@ -134,7 +134,7 @@ fn get_buy_test_tx(test_case: BuyTestCase) -> Transaction {
       )
 }
 
-test success_buy() {
+test success_buy_with_insufficient_stake_control() {
   let output_reference = mock_utxo_ref(0, 1)
   let redeemer = Buy
   let test_case = BuyTestCase { is_proceed_paid_to_malicious_stake_key: True }
