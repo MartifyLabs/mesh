@@ -278,3 +278,8 @@ export const StakeCredentialStatus = Cardano.StakeCredentialStatus;
 export type Metadatum = Cardano.Metadatum;
 
 export const computeAuxiliaryDataHash = Cardano.computeAuxiliaryDataHash;
+
+export type BootstrapWitness = Serialization.BootstrapWitness;
+export const BootstrapWitness = Serialization.BootstrapWitness;
+
+export type ByronAttributes = Cardano.ByronAttributes;

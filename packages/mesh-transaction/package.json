@@ -35,6 +35,9 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@cardano-sdk/core": "^0.45.0",
+    "@cardano-sdk/input-selection": "^0.14.1",
+    "@cardano-sdk/util": "^0.15.5",
     "@meshsdk/common": "1.8.9",
     "@meshsdk/core-csl": "1.8.9",
     "@meshsdk/core-cst": "1.8.9",

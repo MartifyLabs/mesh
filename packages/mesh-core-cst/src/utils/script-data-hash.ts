@@ -54,10 +54,10 @@ export const hashScriptData = (
     /*
      ; Note that in the case that a transaction includes datums but does not
      ; include any redeemers, the script data format becomes (in hex):
-     ; [ 80 | datums | A0 ]
+     ; [ A0 | datums | A0 ]
      ; corresponding to a CBOR empty list and an empty map).
     */
-    writer.writeEncodedValue(CBOR_EMPTY_LIST);
+    writer.writeEncodedValue(CBOR_EMPTY_MAP);
     writer.writeEncodedValue(getCborEncodedArray(datums));
     writer.writeEncodedValue(CBOR_EMPTY_MAP);
   } else {

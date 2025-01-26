@@ -7,6 +7,7 @@ import {
   NativeScript,
   PlutusScript,
   Protocol,
+  TxOutput,
 } from "../types";
 
 export interface IMeshTxSerializer {
@@ -14,6 +15,10 @@ export interface IMeshTxSerializer {
   serializeTxBody(
     txBuilderBody: MeshTxBuilderBody,
     protocolParams: Protocol,
+  ): string;
+  serializeTxBodyWithMockSignatures(
+      txBuilderBody: MeshTxBuilderBody,
+      protocolParams: Protocol,
   ): string;
   addSigningKeys(txHex: string, signingKeys: string[]): string;
   resolver: IResolver;
@@ -26,6 +31,7 @@ export interface IMeshTxSerializer {
     isScriptHash?: boolean,
     network_id?: 0 | 1,
   ): string;
+  serializeOutput(output: TxOutput): string;
 }
 export interface IResolver {
   keys: {
