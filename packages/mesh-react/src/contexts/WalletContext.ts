@@ -1,11 +1,13 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 
+import { IBitcoinWallet } from "@meshsdk/bitcoin";
 import { IWallet } from "@meshsdk/common";
 import { BrowserWallet } from "@meshsdk/wallet";
 
 interface WalletContext {
   hasConnectedWallet: boolean;
   connectedWalletInstance: IWallet;
+  connectedBitcoinWallet: IBitcoinWallet;
   connectedWalletName: string | undefined;
   connectingWallet: boolean;
   connectWallet: (
@@ -15,6 +17,10 @@ interface WalletContext {
   ) => Promise<void>;
   disconnect: () => void;
   setWallet: (walletInstance: IWallet, walletName: string) => void;
+  setBitcoinWallet: (
+    walletInstance: IBitcoinWallet,
+    walletName: string,
+  ) => void;
   setPersist: (persist: boolean) => void;
   error?: unknown;
   address: string;
@@ -45,6 +51,8 @@ export const useWalletStore = () => {
   const [connectedWalletName, setConnectedWalletName] = useState<
     string | undefined
   >(INITIAL_STATE.walletName);
+  const [connectedBitcoinWallet, setConnectedBitcoinWallet] =
+    useState<IBitcoinWallet>({} as IBitcoinWallet);
 
   const connectWallet = useCallback(
     async (walletName: string, extensions?: number[], persist?: boolean) => {
@@ -96,6 +104,15 @@ export const useWalletStore = () => {
     [],
   );
 
+  const setBitcoinWallet = useCallback(
+    async (walletInstance: IBitcoinWallet, walletName: string) => {
+      setConnectedBitcoinWallet(walletInstance);
+      setConnectedWalletName(walletName);
+      setState(WalletState.CONNECTED);
+    },
+    [],
+  );
+
   const setPersist = useCallback((persist: boolean) => {
     setPersistSession(persist);
   }, []);
@@ -112,9 +129,17 @@ export const useWalletStore = () => {
           address = await connectedWalletInstance.getChangeAddress();
         setAddress(address);
       }
+
+      if (
+        Object.keys(connectedBitcoinWallet).length > 0 &&
+        address.length === 0
+      ) {
+        let address = await connectedBitcoinWallet.getChangeAddress();
+        setAddress(address);
+      }
     }
     load();
-  }, [connectedWalletInstance]);
+  }, [connectedWalletInstance, connectedBitcoinWallet]);
 
   // if persist
   useEffect(() => {
@@ -130,11 +155,13 @@ export const useWalletStore = () => {
   return {
     hasConnectedWallet: INITIAL_STATE.walletName !== connectedWalletName,
     connectedWalletInstance,
+    connectedBitcoinWallet,
     connectedWalletName,
     connectingWallet,
     connectWallet,
     disconnect,
     setWallet,
+    setBitcoinWallet,
     setPersist,
     error,
     address,
@@ -145,11 +172,13 @@ export const useWalletStore = () => {
 export const WalletContext = createContext<WalletContext>({
   hasConnectedWallet: false,
   connectedWalletInstance: INITIAL_STATE.walletInstance,
+  connectedBitcoinWallet: {} as IBitcoinWallet,
   connectedWalletName: INITIAL_STATE.walletName,
   connectingWallet: false,
   connectWallet: async () => {},
   disconnect: () => {},
   setWallet: async () => {},
+  setBitcoinWallet: async () => {},
   setPersist: () => {},
   address: "",
   state: WalletState.NOT_CONNECTED,

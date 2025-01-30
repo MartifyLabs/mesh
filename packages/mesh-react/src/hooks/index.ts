@@ -6,4 +6,3 @@ export * from "./useNetwork";
 export * from "./useRewardAddress";
 export * from "./useWallet";
 export * from "./useWalletSubmit";
-// export * from "./useWalletTx";

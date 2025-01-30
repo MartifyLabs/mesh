@@ -1,0 +1,39 @@
+{
+  "name": "@meshsdk/bitcoin",
+  "version": "0.0.1",
+  "description": "Mesh Bitcoin package",
+  "main": "./dist/index.cjs",
+  "browser": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@bitcoin-js/tiny-secp256k1-asmjs": "^2.2.3",
+    "bip32": "^4.0.0",
+    "bip39": "^3.1.0",
+    "bitcoinjs-lib": "^6.1.7",
+    "ecpair": "^2.0.0"
+  },
+  "devDependencies": {
+    "@meshsdk/configs": "*",
+    "@swc/core": "^1.10.7",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  }
+}
