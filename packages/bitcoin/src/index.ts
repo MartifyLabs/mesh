@@ -1,4 +1,5 @@
 export * from "./core";
 export * from "./interfaces";
+export * from "./providers";
 export * from "./types";
-export * from "./wallet";
+export * from "./wallets";

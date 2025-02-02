@@ -3,25 +3,35 @@ import { BIP32Interface } from "bip32";
 import axios from "axios";
 import { UTxO } from "../../types/utxo";
 import { Address } from "../../types/address";
+import { IBitcoinProvider } from "../../interfaces/provider";
 
-export type CreateMeshWalletOptions = {
+export type CreateBitcoinEmbeddedWalletOptions = {
   networkId: 0 | 1;
   key: {
     type: "mnemonic";
     words: string[];
   };
+  provider?: IBitcoinProvider;
 };
 
 /**
  * 0': Indicates the Bitcoin mainnet.
  * 1': Indicates the Bitcoin testnet.
+ * 
+ * EmbeddedWallet is a class that provides a simple interface to interact with Bitcoin wallets.
+ * 
+ * @params options - The options to create an EmbeddedWallet.
+ * networkId - The network ID of the wallet.
+ * key - The key to create the wallet.
+ * provider - The Bitcoin provider to interact with the Bitcoin network.
  */
 export class EmbeddedWallet {
   private readonly _networkId: 0 | 1;
   private readonly _bIP32Interface: BIP32Interface;
   private readonly _p2wpkh: bitcoin.payments.Payment;
+  private readonly _provider?: IBitcoinProvider;
 
-  constructor(options: CreateMeshWalletOptions) {
+  constructor(options: CreateBitcoinEmbeddedWalletOptions) {
     this._networkId = options.networkId;
 
     const bIP32Interface = WalletStaticMethods.fromMnemonic(
@@ -37,6 +47,8 @@ export class EmbeddedWallet {
           ? bitcoin.networks.bitcoin
           : bitcoin.networks.testnet,
     });
+
+    this._provider = options.provider;
   }
 
   /**
@@ -68,17 +80,13 @@ export class EmbeddedWallet {
    * @returns An array of UTXOs.
    */
   async getUtxos(): Promise<UTxO[]> {
+    console.log("getUtxos");
     const address = this.getPaymentAddress();
-    const network = this._networkId === 0 ? "mainnet" : "testnet";
-    const url = `https://blockstream.info/${network}/api/address/${address.address}/utxo`;
-
-    try {
-      const response = await axios.get(url);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching UTXOs:", error);
-      throw new Error("Failed to fetch UTXOs");
+    if (this._provider === undefined) {
+      throw new Error("`provider` is not defined. Provide a BitcoinProvider.");
     }
+
+    return await this._provider?.fetchAddressUTxOs(address.address);
   }
 
   /**

@@ -1,12 +1,18 @@
 import type { NextPage } from "next";
 
-import { BrowserWallet, EmbeddedWallet } from "@meshsdk/bitcoin";
+import {
+  BlockstreamProvider,
+  BrowserWallet,
+  EmbeddedWallet,
+} from "@meshsdk/bitcoin";
 
 import Button from "~/components/button/button";
 import Metatags from "~/components/site/metatags";
 
 const ReactPage: NextPage = () => {
   async function loadEmbeddedWallet() {
+    const provider = new BlockstreamProvider("testnet");
+
     const mnemonic =
       "birth cannon between under split jewel slow love sugar camera dignity excess";
     const expectAddress = "tb1q3x7c8nuew6ayzmy3fnfx6ydnr8a4kf2267za7y";
@@ -17,6 +23,7 @@ const ReactPage: NextPage = () => {
         type: "mnemonic",
         words: mnemonic.split(" "),
       },
+      provider: provider,
     });
 
     const address = wallet.getPaymentAddress();
@@ -32,7 +39,20 @@ const ReactPage: NextPage = () => {
     console.log("getaddress", await wallet.getAddresses());
     // console.log("signMessage", await wallet.signData("test message"));
 
-    console.log("request getBalance", await wallet.request('getBalance'));
+    console.log("request getBalance", await wallet.request("getBalance"));
+  }
+
+  async function provider() {
+    const provider = new BlockstreamProvider("testnet");
+
+    const address = "tb1q3x7c8nuew6ayzmy3fnfx6ydnr8a4kf2267za7y";
+
+    // const utxos = await provider.fetchAddressUTxOs(address);
+    // console.log("utxos", utxos);
+
+    const fetchAddressTransactions = await provider.fetchAddressTransactions(address);
+    console.log("fetchAddressTransactions", fetchAddressTransactions);
+
   }
 
   return (
@@ -40,6 +60,8 @@ const ReactPage: NextPage = () => {
       <Metatags title={"Bitcoin"} description={"Building in progress"} />
       <Button onClick={() => loadEmbeddedWallet()}>loadEmbeddedWallet</Button>
       <Button onClick={() => loadBrowserWallet()}>loadBrowserWallet</Button>
+
+      <Button onClick={() => provider()}>provider</Button>
     </>
   );
 };
