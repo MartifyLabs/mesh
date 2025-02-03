@@ -67,9 +67,17 @@ validator escrow {
         expect InlineDatum(raw_input_datum) = input.output.datum
         expect input_datum: EscrowDatum = raw_input_datum
         when input_datum is {
-          Initiation { initiator, .. } -> {
+          Initiation { initiator, initiator_assets } -> {
             expect Some(pub_key) = address_pub_key(initiator)
-            key_signed(extra_signatories, pub_key)
+            let is_initiator_signed = key_signed(extra_signatories, pub_key)
+
+            let initiator_received = get_all_value_to(outputs, initiator)
+            let is_initiator_received_value =
+              value_geq(
+                initiator_received,
+                initiator_assets |> from_asset_list(),
+              )
+            is_initiator_signed && is_initiator_received_value
           }
 
           ActiveEscrow {

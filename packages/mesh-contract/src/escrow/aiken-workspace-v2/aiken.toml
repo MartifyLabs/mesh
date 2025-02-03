@@ -1,6 +1,6 @@
 name = "meshjs/escrow"
 version = "0.0.0"
-compiler = "v1.1.0"
+compiler = "v1.1.9"
 plutus = "v3"
 license = "Apache-2.0"
 description = "Aiken contracts for project 'meshjs/escrow'"
