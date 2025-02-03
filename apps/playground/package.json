@@ -16,6 +16,7 @@
     "@mdx-js/react": "^3.0.1",
     "@meshsdk/contract": "*",
     "@meshsdk/core": "*",
+    "@meshsdk/hydra": "*",
     "@meshsdk/react": "*",
     "@next/mdx": "^14.2.3",
     "@next/third-parties": "^14.2.5",

@@ -39,6 +39,28 @@ function Left(
 
   async function startNode() {}
 
+  let codeOnMessage = ``;
+  codeOnMessage += `hydraProvider.onMessage((message) => {\n`;
+  codeOnMessage += `  console.log(message);\n`;
+  codeOnMessage += `});\n`;
+
+  let codeGreetingsMessage = `{\n`;
+  codeGreetingsMessage += `  "peer": "bob-node",\n`;
+  codeGreetingsMessage += `  "seq": 0,\n`;
+  codeGreetingsMessage += `  "tag": "PeerConnected",\n`;
+  codeGreetingsMessage += `  "timestamp": "2023-08-17T18:25:02.903974459Z"\n`;
+  codeGreetingsMessage += `}\n`;
+  codeGreetingsMessage += `{\n`;
+  codeGreetingsMessage += `  "headStatus": "Idle",\n`;
+  codeGreetingsMessage += `  "hydraNodeVersion": "0.12.0-54db2265c257c755df98773c64754c9854d879e8",\n`;
+  codeGreetingsMessage += `  "me": {\n`;
+  codeGreetingsMessage += `    "vkey": "ab159b29b87b498fa060f6045cccf84ecd20cf623f7820ed130ffc849633a120"\n`;
+  codeGreetingsMessage += `  },\n`;
+  codeGreetingsMessage += `  "seq": 1,\n`;
+  codeGreetingsMessage += `  "tag": "Greetings",\n`;
+  codeGreetingsMessage += `  "timestamp": "2023-08-17T18:32:29.092329511Z"\n`;
+  codeGreetingsMessage += `};\n`;
+
   return (
     <>
       <p>
@@ -70,7 +92,14 @@ function Left(
         connection to the API port:
       </p>
 
-      <Codeblock data={`websocat ws://127.0.0.1:4001 | jq`} />
+      <Codeblock data={codeOnMessage} />
+
+      <p>
+        This opens a duplex connection and you should see messages indicating
+        successful connections like:
+      </p>
+
+      <Codeblock data={codeGreetingsMessage} />
     </>
   );
 }

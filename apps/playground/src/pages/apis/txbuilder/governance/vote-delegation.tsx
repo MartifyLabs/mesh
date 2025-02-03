@@ -34,7 +34,7 @@ function Left() {
   codeTx += `    rewardAddress,\n`;
   codeTx += `  )\n`;
   codeTx += `  .changeAddress(changeAddress)\n`;
-  codeTx += `  .selectUtxos(utxos, "keepRelevant", "10000000")`;
+  codeTx += `  .selectUtxosFrom(utxos, "keepRelevant", "10000000")`;
 
   let codeBuildSign = `const unsignedTx = await txBuilder.complete();\n`;
   codeBuildSign += `const signedTx = await wallet.signTx(unsignedTx);\n`;

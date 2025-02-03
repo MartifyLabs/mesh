@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 
-import { HydraInstance, HydraProvider, MeshWallet } from "@meshsdk/core";
+import { MeshWallet } from "@meshsdk/core";
+import { HydraInstance, HydraProvider } from "@meshsdk/hydra";
 
 import SidebarFullwidth from "~/components/layouts/sidebar-fullwidth";
 import Link from "~/components/link";
@@ -23,7 +24,9 @@ const ReactPage: NextPage = () => {
   const [bobNode, setBobNode] = useState<MeshWallet | undefined>(undefined);
   const [bobFunds, setBobFunds] = useState<MeshWallet | undefined>(undefined);
 
-  const hydraProvider = new HydraProvider({ url: "http://35.189.158.126:4001" });
+  const hydraProvider = new HydraProvider({
+    url: "http://35.189.158.126:4001",
+  });
   const hydraInstance = new HydraInstance({
     provider: hydraProvider,
   });

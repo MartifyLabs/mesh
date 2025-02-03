@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { HydraProvider } from "@meshsdk/core";
+import { HydraProvider } from "@meshsdk/hydra";
 
 import ButtonFloatDocumentation from "~/components/button/button-float-documentation";
 import SidebarFullwidth from "~/components/layouts/sidebar-fullwidth";
@@ -33,7 +33,10 @@ const ReactPage: NextPage = () => {
   code1 += `\nawait hydraProvider.connect();`;
 
   const hydraUrl = useProviders((state) => state.hydraUrl);
-  const hydraProvider = new HydraProvider({ url: hydraUrl });
+
+  const hydraProvider = new HydraProvider({
+    url: hydraUrl,
+  });
 
   return (
     <>

@@ -48,8 +48,7 @@ export class HydraConnection extends EventEmitter {
       console.error("Hydra websocket closed", code);
     };
     this._websocket.onmessage = (data) => {
-      // console.log("Received message", JSON.parse(data.data));
-      const message = JSON.parse(data.data);
+      const message = JSON.parse(data.data as string);
       this._eventEmitter.emit("onmessage", message);
       this.processStatus(message);
     };

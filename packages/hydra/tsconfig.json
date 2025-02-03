@@ -1,0 +1,9 @@
+{
+  "extends": "@meshsdk/configs/typescript/base.json",
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

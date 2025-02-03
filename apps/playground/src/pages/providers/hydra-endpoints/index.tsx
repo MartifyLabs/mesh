@@ -1,4 +1,4 @@
-import { HydraProvider } from "@meshsdk/core";
+import { HydraProvider } from "@meshsdk/hydra";
 
 import HydraInitializeHead from "./init-head";
 import HydraOnMessage from "./on-message";

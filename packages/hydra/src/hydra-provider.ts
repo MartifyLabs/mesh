@@ -15,11 +15,36 @@ import {
   UTxO,
 } from "@meshsdk/common";
 
-import { parseHttpError } from "../utils";
+import { parseHttpError } from "./utils";
 import { toUTxO } from "./convertor";
 import { HydraConnection } from "./hydra-connection";
-import { IHydraTransaction } from "./interfaces";
-import { HydraStatus, HydraUTxO } from "./types";
+import { HydraStatus, HydraTransaction, HydraUTxO } from "./types";
+import {
+  CommandFailed,
+  Committed,
+  DecommitApproved,
+  DecommitFinalized,
+  DecommitInvalid,
+  DecommitRequested,
+  GetUTxOResponse,
+  Greetings,
+  HeadIsAborted,
+  HeadIsClosed,
+  HeadIsContested,
+  HeadIsFinalized,
+  HeadIsInitializing,
+  HeadIsOpen,
+  IgnoredHeadInitializing,
+  InvalidInput,
+  PeerConnected,
+  PeerDisconnected,
+  PeerHandshakeFailure,
+  PostTxOnChainFailed,
+  ReadyToFanout,
+  SnapshotConfirmed,
+  TxInvalid,
+  TxValid,
+} from "./types/events";
 
 /**
  * HydraProvider is a tool for administrating & interacting with Hydra Heads.
@@ -171,19 +196,39 @@ export class HydraProvider implements IFetcher, ISubmitter {
   }
 
   /**
+   * A generic method to post data to a URL.
+   * @param url - The URL to post data to
+   * @param payload - The data to post
+   * @returns - The response from the URL
+   */
+  async post(url: string, payload: any): Promise<any> {
+    try {
+      const { data, status } = await this._axiosInstance.post(url, payload);
+      if (status === 200 || status == 202) {
+        return data;
+      }
+      throw parseHttpError(data);
+    } catch (error) {
+      throw parseHttpError(error);
+    }
+  }
+
+  /**
    * Submit a transaction to the Hydra node. Note, unlike other providers, Hydra does not return a transaction hash.
    * @param tx - The transaction in CBOR hex format
    */
   async submitTx(tx: string): Promise<string> {
     try {
       await this.newTx(tx, "Witnessed Tx ConwayEra");
-
       const txId = await new Promise<string>((resolve) => {
         this.onMessage((message) => {
-          if (message.transaction && message.transaction.cborHex === tx) {
-            if (message.tag === "TxValid") {
-              resolve(message.transaction.txId);
-            } else if (message.tag == "TxInvalid") {
+          if (message.tag === "TxValid") {
+            if (message.transaction && message.transaction.cborHex === tx) {
+              resolve(message.transaction.txId!);
+            }
+          }
+          if (message.tag === "TxInvalid") {
+            if (message.transaction && message.transaction.cborHex === tx) {
               throw JSON.stringify(message.validationError);
             }
           }
@@ -194,6 +239,20 @@ export class HydraProvider implements IFetcher, ISubmitter {
       throw parseHttpError(error);
     }
   }
+
+  /**
+   * Commands sent to the Hydra node.
+   * https://hydra.family/head-protocol/api-reference/#operation-publish-/
+   *
+   * Accepts one of the following commands:
+   * - Init: init()
+   * - Abort: abort()
+   * - NewTx: newTx()
+   * - Decommit: decommit()
+   * - Close: close()
+   * - Contest: contest()
+   * - Fanout: fanout()
+   */
 
   /**
    * Initializes a new Head. This command is a no-op when a Head is already open and the server will output an CommandFailed message should this happen.
@@ -225,7 +284,7 @@ export class HydraProvider implements IFetcher, ISubmitter {
     description = "",
     txId?: string,
   ) {
-    const transaction: IHydraTransaction = {
+    const transaction: HydraTransaction = {
       type: type,
       description: description,
       cborHex: cborHex,
@@ -289,8 +348,138 @@ export class HydraProvider implements IFetcher, ISubmitter {
     this._connection.send(data);
   }
 
-  onMessage(callback: (message: any) => void) {
-    this._eventEmitter.on("onmessage", callback);
+  // todo: is this function https://hydra.family/head-protocol/api-reference/#operation-publish-/commit the same as the POST?
+  // curl -X POST 127.0.0.1:4001/commit \
+  // --data @alice-commit-utxo.json \
+  // > alice-commit-tx.json
+  /**
+   * Draft a commit transaction, which can be completed and later submitted to the L1 network.
+   * https://hydra.family/head-protocol/api-reference/#operation-publish-/commit
+   */
+  async commit(){
+    await this.post("/commit", {
+      // todo --data @alice-commit-utxo.json
+    });
+    // return alice-commit-tx.json
+
+// If you don't want to commit any funds and only want to receive on layer two, you can request an empty commit transaction as shown below (example for bob):
+// curl -X POST 127.0.0.1:4002/commit --data "{}" > bob-commit-tx.json
+// cardano-cli transaction submit --tx-file bob-commit-tx.json
+  }
+
+  /**
+   * Events emitted by the Hydra node.
+   * https://hydra.family/head-protocol/api-reference/#operation-subscribe-/
+   *
+   * @param callback - The callback function to be called when a message is received
+   */
+  onMessage(
+    callback: (
+      data:
+        | Greetings
+        | PeerConnected
+        | PeerDisconnected
+        | PeerHandshakeFailure
+        | HeadIsInitializing
+        | Committed
+        | HeadIsOpen
+        | HeadIsClosed
+        | HeadIsContested
+        | ReadyToFanout
+        | HeadIsAborted
+        | HeadIsFinalized
+        | TxValid
+        | TxInvalid
+        | SnapshotConfirmed
+        | GetUTxOResponse
+        | InvalidInput
+        | PostTxOnChainFailed
+        | CommandFailed
+        | IgnoredHeadInitializing
+        | DecommitInvalid
+        | DecommitRequested
+        | DecommitApproved
+        | DecommitFinalized,
+    ) => void,
+  ) {
+    this._eventEmitter.on("onmessage", (message) => {
+      switch (message.tag) {
+        case "Greetings":
+          callback(message as Greetings);
+          break;
+        case "PeerConnected":
+          callback(message as PeerConnected);
+          break;
+        case "onPeerDisconnected":
+          callback(message as PeerDisconnected);
+          break;
+        case "PeerHandshakeFailure":
+          callback(message as PeerHandshakeFailure);
+          break;
+        case "HeadIsInitializing":
+          callback(message as HeadIsInitializing);
+          break;
+        case "Committed":
+          callback(message as Committed);
+          break;
+        case "HeadIsOpen":
+          callback(message as HeadIsOpen);
+          break;
+        case "HeadIsClosed":
+          callback(message as HeadIsClosed);
+          break;
+        case "HeadIsContested":
+          callback(message as HeadIsContested);
+          break;
+        case "ReadyToFanout":
+          callback(message as ReadyToFanout);
+          break;
+        case "HeadIsAborted":
+          callback(message as HeadIsAborted);
+          break;
+        case "HeadIsFinalized":
+          callback(message as HeadIsFinalized);
+          break;
+        case "TxValid":
+          callback(message as TxValid);
+          break;
+        case "TxInvalid":
+          callback(message as TxInvalid);
+          break;
+        case "SnapshotConfirmed":
+          callback(message as SnapshotConfirmed);
+          break;
+        case "GetUTxOResponse":
+          callback(message as GetUTxOResponse);
+          break;
+        case "InvalidInput":
+          callback(message as InvalidInput);
+          break;
+        case "PostTxOnChainFailed":
+          callback(message as PostTxOnChainFailed);
+          break;
+        case "CommandFailed":
+          callback(message as CommandFailed);
+          break;
+        case "IgnoredHeadInitializing":
+          callback(message as IgnoredHeadInitializing);
+          break;
+        case "DecommitInvalid":
+          callback(message as DecommitInvalid);
+          break;
+        case "DecommitRequested":
+          callback(message as DecommitRequested);
+          break;
+        case "DecommitApproved":
+          callback(message as DecommitApproved);
+          break;
+        case "DecommitFinalized":
+          callback(message as DecommitFinalized);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   onStatusChange(callback: (status: HydraStatus) => void) {

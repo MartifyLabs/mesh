@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { HydraInstance, HydraProvider, MeshWallet } from "@meshsdk/core";
+import { MeshWallet } from "@meshsdk/core";
+import { HydraInstance } from "@meshsdk/hydra";
 
 import Button from "~/components/button/button";
-import Link from "~/components/link";
 import TwoColumnsScroll from "~/components/sections/two-columns-scroll";
 import Codeblock from "~/components/text/codeblock";
 
@@ -69,7 +69,7 @@ function Left(
         Send this command to initialize a head through the WebSocket connection:
       </p>
 
-      <Codeblock data={`code about starting node`} />
+      <Codeblock data={`await hydraInstance.provider.init();`} />
       <Button
         onClick={() => openHead()}
         style={loading ? "warning" : "light"}
@@ -90,6 +90,24 @@ function Left(
         available on layer 2. Use the HTTP API of hydra-node to commit all funds
         given to <code>{"{alice,bob}-funds.vk"}</code> beforehand:
       </p>
+
+      {/* todo, for alice and bob */}
+      {/* https://hydra.family/head-protocol/docs/tutorial/#step-4-open-a-hydra-head */}
+
+      {/* cardano-cli query utxo \
+  --address $(cat credentials/alice-funds.addr) \
+  --out-file alice-commit-utxo.json
+
+curl -X POST 127.0.0.1:4001/commit \
+  --data @alice-commit-utxo.json \
+  > alice-commit-tx.json
+
+cardano-cli transaction sign \
+  --tx-file alice-commit-tx.json \
+  --signing-key-file credentials/alice-funds.sk \
+  --out-file alice-commit-tx-signed.json
+
+cardano-cli transaction submit --tx-file alice-commit-tx-signed.json */}
 
       <Codeblock data={`code about starting node`} />
       <Button
